@@ -1,5 +1,5 @@
 # Ravepay Nodejs Library v1.0.0
-
+[![npm version](https://img.shields.io/npm/v/ravepay)](https://www.npmjs.com/package/ravepay)
 ## Ravepay Services exposed by the library
 
 - Card Charge
@@ -13,7 +13,7 @@
 - Payment Plan
 - Card PreAuthorization
 
-For more information on the services listed above, visit the [Ravepay website](http://rave.flutterwave.com/)
+For more information on the services listed above, visit the [Ravepay website](http://rave.flutterwave.com/).
 
 ## How to use
 
@@ -218,7 +218,7 @@ A sample response is:
 ### ```.bulk()```
 This allows you send bulk transfers.
 
-The payload should contain the following parameters
+The payload should contain the following parameters:
 
 * ```'bulk_data', 'required:true, eg:{ "Bank":"044","Account Number":"0690000032"},{"Bank":"044","Account Number":"0690000032"}'```,
 
@@ -321,7 +321,7 @@ A sample response is:
 ```
 
 ### ```.list()```
-This allows you fetch all transfers using a GET method
+This allows you fetch all transfers using a GET method:
 
 ```javascript
 rave.Transfer.list() 
@@ -335,7 +335,7 @@ rave.Transfer.list()
 ```
 
 ### ```.getApplicableFee()```
-This retrieves the fee for a transfer
+This retrieves the fee for a transfer:
 
 ```javascript
 rave.Transfer.getApplicableFee()
@@ -373,7 +373,7 @@ A sample response is:
 
 ### Subaccounts
 
-This is used to create and manage subaccounts
+This is used to create and manage subaccounts.
 
 **Functions included:**
 
@@ -437,7 +437,7 @@ This call returns:
 }
 ```
 
-A sample ```.err``` contains
+A sample ```.err``` contains:
 ```javascript
 {
     "status": "error",
@@ -461,7 +461,7 @@ rave.Subaccount.list()
 ```
 
 ### ```.fetch()```
-This allows you fetch a single subaccount using the subaccount ID
+This allows you fetch a single subaccount using the subaccount ID.
 
 ```javascript
 rave.Subaccount.fetch(subaccount_id) 
@@ -564,7 +564,7 @@ rave.Paymentplan.list()
 
 
 ### ```.fetch()```
-This function allows you to fetch a single payment plan
+This function allows you to fetch a single payment plan:
 
 ```javascript
 rave.Paymentplan.fetch(plan_id) 
@@ -579,7 +579,7 @@ rave.Paymentplan.fetch(plan_id)
 
 
 ### ```.cancel()```
-This function allows you to cancel an exisiting payment plan
+This function allows you to cancel an exisiting payment plan:
 
 ```javascript
 
@@ -599,7 +599,7 @@ rave.Paymentplan.cancel(
 
 
 ### ```.edit()```
-This function allows you to edit a payment plan
+This function allows you to edit a payment plan:
 
 ```javascript
 
@@ -663,7 +663,7 @@ rave.Subscription.fetch(subscription_id)
 ```
 
 ### ```.cancel()```
-This function allows you to cancel an exisiting subscription
+This function allows you to cancel an exisiting subscription.
 
 ```javascript
 
@@ -681,7 +681,7 @@ rave.Subscription.cancel(
 ```
 
 ### ```.activate()```
-This page describes how to activate a subscription
+This page describes how to activate a subscription.
 
 ```javascript
 
