@@ -6,7 +6,7 @@
 - Tokenized Charge
 - Fees
 - Banks
-- Account Charge 
+- Account Charge
 - Transfers
 - Subaccount
 - Subscription
@@ -20,12 +20,10 @@ For more information on the services listed above, visit the [Ravepay website](h
 `npm install ravepay`
 
 
- You can get your PUBLICK_KEY and SECRET_KEY from the Rave dashboard. 
+ You can get your PUBLICK_KEY and SECRET_KEY from the Rave dashboard.
 
  Go [here](https://rave.flutterwave.com/dashboard/settings/apis) to get your live keys.
- Go [here](https://rave.flutterwave.com/dashboard/settings/apis) to get your live keys.
 
- 
 ```
 var Ravepay = require('ravepay');
 
@@ -75,12 +73,12 @@ rave.Card.charge(
         "otp":12345
     }).then(response => {
         console.log(response.body.data.tx);
-        
+
     })
-    
+
 }).catch(err => {
     console.log(err);
-    
+
 })
 ```
 
@@ -107,12 +105,12 @@ rave.TokenCharge.card({
     console.log(resp.body);
 }).catch(err => {
     console.log(err);
-    
+
 })
 ```
 
 
-### Tranfers
+### Transfers
 When a transfer is initiated, it comes with a status ```NEW``` this means the transfer has been queued for processing, and you would need to use the ```reference``` you passed to call the Fetch a Transfer endpoint to retrieve the updated status of the transfer.
 
 **Available countries you can transfer to**
@@ -150,19 +148,19 @@ When a transfer is initiated, it comes with a status ```NEW``` this means the tr
 ### ```.initiate()```
 This is called to start a transfer. The payload should contain the following card information:
 
-* ```'account_bank', 'required:true, eg:044'```, 
+* ```'account_bank', 'required:true, eg:044'```,
 
-* ```'account_number 'required:true,validators:isNumeric, eg:06900021'```, 
+* ```'account_number 'required:true,validators:isNumeric, eg:06900021'```,
 
-* ```'amount', 'required:true, eg:10'```, 
+* ```'amount', 'required:true, eg:10'```,
 
-* ```'secKey', 'required:true,eg:FLWSECK-e6db11d1f8a6208de8cb2f94e293450e-X'```, 
+* ```'secKey', 'required:true,eg:FLWSECK-e6db11d1f8a6208de8cb2f94e293450e-X'```,
 
-* ```'narration', 'required:false,eg:New transfer'```, 
+* ```'narration', 'required:false,eg:New transfer'```,
 
-* ```'currency', 'required:required,eg:NGN'```, 
+* ```'currency', 'required:required,eg:NGN'```,
 
-* ```'reference', 'required:required,eg:mk-902837-jk'```, 
+* ```'reference', 'required:required,eg:mk-902837-jk'```,
 
 
 ```javascript
@@ -181,10 +179,10 @@ rave.Transfer.initiate(
     }
 ).then(resp => {
     console.log(resp.body);
-    
+
 }).catch(err => {
     console.log(err);
-    
+
 })
 ```
 #### Returns
@@ -216,9 +214,9 @@ A sample response is:
 ```
 
 ### ```.bulk()```
-This allows you send bulk transfers.
+This allows you to send bulk transfers.
 
-The payload should contain the following parameters
+The payload should contain the following parameters:
 
 * ```'bulk_data', 'required:true, eg:{ "Bank":"044","Account Number":"0690000032"},{"Bank":"044","Account Number":"0690000032"}'```,
 
@@ -247,10 +245,10 @@ rave.Transfer.bulk(
 }
 ).then(resp => {
     console.log(resp.body);
-    
+
 }).catch(err => {
     console.log(err);
-    
+
 })
 ```
 #### Returns
@@ -270,17 +268,17 @@ A sample response is:
 ```
 
 ### ```.fetch()```
-This allows you retrieve a single transfer.
+This allows you to retrieve a single transfer.
 It uses a GET method.
 
 ```javascript
-rave.Transfer.fetch('<id="transfer ID" e.g mk-902837-jk>') 
+rave.Transfer.fetch('<id="transfer ID" e.g mk-902837-jk>')
     .then(resp => {
         console.log(resp.body);
-        
+
     }).catch(err => {
         console.log(err);
-        
+
     })
 ```
 #### Returns
@@ -321,30 +319,30 @@ A sample response is:
 ```
 
 ### ```.list()```
-This allows you fetch all transfers using a GET method
+This allows you to fetch all transfers using a GET method.
 
 ```javascript
-rave.Transfer.list() 
+rave.Transfer.list()
     .then(resp => {
         console.log(resp.body);
-        
+
     }).catch(err => {
         console.log(err);
-        
+
     })
 ```
 
 ### ```.getApplicableFee()```
-This retrieves the fee for a transfer
+This retrieves the fee for a transfer.
 
 ```javascript
 rave.Transfer.getApplicableFee()
     .then(resp => {
         console.log(resp.body);
-        
+
     }).catch(err => {
         console.log(err);
-        
+
     })
 ```
 
@@ -373,7 +371,7 @@ A sample response is:
 
 ### Subaccounts
 
-This is used to create and manage subaccounts
+This is used to create and manage subaccounts.
 
 **Functions included:**
 
@@ -406,10 +404,10 @@ rave.Subaccount.create(
 }
 ).then(resp => {
     console.log(resp.body);
-    
+
 }).catch(err => {
     console.log(err);
-    
+
 })
 ```
 #### Returns
@@ -450,27 +448,27 @@ A sample ```.err``` contains
 This allows you to list all or specific subaccounts.
 
 ```javascript
-rave.Subaccount.list() 
+rave.Subaccount.list()
     .then(resp => {
         console.log(resp.body);
 
     }).catch(err => {
         console.log(err);
-        
+
     })
 ```
 
 ### ```.fetch()```
-This allows you fetch a single subaccount using the subaccount ID
+This allows you to fetch a single subaccount using the subaccount ID.
 
 ```javascript
-rave.Subaccount.fetch(subaccount_id) 
+rave.Subaccount.fetch(subaccount_id)
     .then(resp => {
         console.log(resp.body);
-        
+
     }).catch(err => {
         console.log(err);
-        
+
     })
 ```
 
@@ -495,7 +493,7 @@ When you have created a payment plan you can subscribe a customer to it by simpl
 
 
 ### ```.create()```
-This function allows you to create payment plans  on rave.
+This function allows you to create payment plans on rave.
 
 ```javascript
 var Ravepay = require('ravepay');
@@ -503,22 +501,22 @@ var Ravepay = require('ravepay');
 var rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
 
 rave.Paymentplan.create(
-    { 
+    {
         amount: '10',
         name: 'fosm',
         interval: 'daily',
         duration: 5,
     },
-        json: true 
+        json: true
     }
-    
-    
+
+
 ).then(resp => {
     console.log(resp.body);
-    
+
 }).catch(err => {
     console.log(err);
-    
+
 })
 ```
 
@@ -545,75 +543,75 @@ A sample response is seen below:
 
 
 ### ```.list()```
-This function allows you to list all the payment plans  on an account.
+This function allows you to list all the payment plans on an account.
 
 ```javascript
 var Ravepay = require('ravepay');
 
 var rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
 
-rave.Paymentplan.list() 
+rave.Paymentplan.list()
     .then(resp => {
         console.log(resp.body);
-        
+
     }).catch(err => {
         console.log(err);
-        
+
     })
 ```
 
 
 ### ```.fetch()```
-This function allows you to fetch a single payment plan
+This function allows you to fetch a single payment plan.
 
 ```javascript
-rave.Paymentplan.fetch(plan_id) 
+rave.Paymentplan.fetch(plan_id)
     .then(resp => {
         console.log(resp.body);
-        
+
     }).catch(err => {
         console.log(err);
-        
+
     })
 ```
 
 
 ### ```.cancel()```
-This function allows you to cancel an exisiting payment plan
+This function allows you to cancel an existing payment plan.
 
 ```javascript
 
 rave.Paymentplan.cancel(
     {
 	"id": 912,
-	
+
 }
 ).then(resp => {
     console.log(resp.body);
-    
+
 }).catch(err => {
     console.log(err);
-    
+
 })
 ```
 
 
 ### ```.edit()```
-This function allows you to edit a payment plan
+This function allows you to edit a payment plan.
 
 ```javascript
 
 rave.Paymentplan.edit(
     {
 	"id": 912,
-	
+
 }
 ).then(resp => {
     console.log(resp.body);
-    
+
 }).catch(err => {
     console.log(err);
-    
+
 })
 ```
 
@@ -638,13 +636,13 @@ var Ravepay = require('ravepay');
 
 var rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
 
-rave.Subscription.list() 
+rave.Subscription.list()
     .then(resp => {
         console.log(resp.body);
 
     }).catch(err => {
         console.log(err);
-        
+
     })
 ```
 
@@ -652,18 +650,18 @@ rave.Subscription.list()
 This function allows you to get a particular subscription on a merchant account.
 
 ```javascript
-rave.Subscription.fetch(subscription_id) 
+rave.Subscription.fetch(subscription_id)
     .then(resp => {
         console.log(resp.body);
-        
+
     }).catch(err => {
         console.log(err);
-        
+
     })
 ```
 
 ### ```.cancel()```
-This function allows you to cancel an exisiting subscription
+This function allows you to cancel an existing subscription.
 
 ```javascript
 
@@ -673,28 +671,28 @@ rave.Subscription.cancel(
     }
 ).then(resp => {
     console.log(resp.body);
-    
+
 }).catch(err => {
     console.log(err);
-    
+
 })
 ```
 
 ### ```.activate()```
-This page describes how to activate a subscription
+This page describes how to activate a subscription.
 
 ```javascript
 
 rave.Subscription.activate(
     {
 	"id": 912,
-	
+
 }
 ).then(resp => {
     console.log(resp.body);
-    
+
 }).catch(err => {
     console.log(err);
-    
+
 })
 ```
