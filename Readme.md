@@ -20,7 +20,7 @@ For more information on the services listed above, visit the [Ravepay website](h
 `npm install ravepay`
 
 
- You can get your PUBLICK_KEY and SECRET_KEY from the Rave dashboard. 
+ You can get your PUBLIC_KEY and SECRET_KEY from the Rave dashboard. 
 
  Go [here](https://rave.flutterwave.com/dashboard/settings/apis) to get your live keys.
  Go [here](https://rave.flutterwave.com/dashboard/settings/apis) to get your live keys.
@@ -29,15 +29,15 @@ For more information on the services listed above, visit the [Ravepay website](h
 ```
 var Ravepay = require('ravepay');
 
-var rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, PRODUCTION_FLAG);
+var rave = new Ravepay(PUBLIC_KEY, SECRET_KEY, PRODUCTION_FLAG);
 ```
 
 If you pass true as the value for PRODUCTION_FLAG, the library will use the production url as the base for all calls. Otherwise it will use the staging base url;
 
 ```
-var rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, PRODUCTION_FLAG); //Base url is 'https://ravesandboxapi.flutterwave.com'
+var rave = new Ravepay(PUBLIC_KEY, SECRET_KEY, PRODUCTION_FLAG); //Base url is 'https://ravesandboxapi.flutterwave.com'
 
-var rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, true); //Base url is 'http://api.ravepay.co'
+var rave = new Ravepay(PUBLIC_KEY, SECRET_KEY, true); //Base url is 'http://api.ravepay.co'
 
 ```
 
@@ -46,7 +46,7 @@ var rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, true); //Base url is 'http://api
 ```javascript
 var Ravepay = require('ravepay');
 
-var rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
+var rave = new Ravepay(PUBLIC_KEY, SECRET_KEY, false);
 
 rave.Card.charge(
     {
@@ -90,7 +90,7 @@ rave.Card.charge(
 ```javascript
 var Ravepay = require('ravepay');
 
-var rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
+var rave = new Ravepay(PUBLIC_KEY, SECRET_KEY, false);
 
 rave.TokenCharge.card({
    "currency":"NGN",
@@ -168,7 +168,7 @@ This is called to start a transfer. The payload should contain the following car
 ```javascript
 var Ravepay = require('ravepay');
 
-var rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
+var rave = new Ravepay(PUBLIC_KEY, SECRET_KEY, false);
 
 rave.Transfer.initiate(
     {
@@ -391,7 +391,7 @@ This function helps you to create a subaccount on rave.
 ```javascript
 var Ravepay = require('ravepay');
 
-var rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
+var rave = new Ravepay(PUBLIC_KEY, SECRET_KEY, false);
 
 rave.Subaccount.create(
     {
@@ -500,7 +500,7 @@ This function allows you to create payment plans  on rave.
 ```javascript
 var Ravepay = require('ravepay');
 
-var rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
+var rave = new Ravepay(PUBLIC_KEY, SECRET_KEY, false);
 
 rave.Paymentplan.create(
     { 
@@ -550,7 +550,7 @@ This function allows you to list all the payment plans  on an account.
 ```javascript
 var Ravepay = require('ravepay');
 
-var rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
+var rave = new Ravepay(PUBLIC_KEY, SECRET_KEY, false);
 
 rave.Paymentplan.list() 
     .then(resp => {
@@ -636,7 +636,7 @@ This function allows you to list all subscriptions on a merchant account.
 ```javascript
 var Ravepay = require('ravepay');
 
-var rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
+var rave = new Ravepay(PUBLIC_KEY, SECRET_KEY, false);
 
 rave.Subscription.list() 
     .then(resp => {
