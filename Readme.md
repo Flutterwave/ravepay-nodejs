@@ -112,7 +112,7 @@ rave.TokenCharge.card({
 ```
 
 
-### Tranfers
+### Transfers
 When a transfer is initiated, it comes with a status ```NEW``` this means the transfer has been queued for processing, and you would need to use the ```reference``` you passed to call the Fetch a Transfer endpoint to retrieve the updated status of the transfer.
 
 **Available countries you can transfer to**
