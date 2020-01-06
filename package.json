@@ -4,7 +4,8 @@
   "description": "Official Node library for Rave by Flutterwave",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha **/*.test.js",
+    "test-watch": "nodemon --exec \"npm test\""
   },
   "keywords": [
     "ravepay",

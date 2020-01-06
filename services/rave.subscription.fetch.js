@@ -29,7 +29,7 @@ function service(_rave, reference=""){
 	})
 	.then( response => {
 
-		console.log(response);
+		// console.log(response);
 		d.resolve(response);
 
 	})

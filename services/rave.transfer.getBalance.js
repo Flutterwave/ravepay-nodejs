@@ -16,7 +16,7 @@ function service(data, _rave){
 
         var validated = morx.validate(data, spec, _rave.MORX_DEFAULT);
         var params = validated.params;
-        console.log(params)
+        // console.log(params)
         // params.country = params.country || "NG";
         _rave.params = params
         return  (_rave);

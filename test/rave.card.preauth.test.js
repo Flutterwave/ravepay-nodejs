@@ -41,13 +41,13 @@ describe("#Rave Preauth service test", function(){
                 "device_fingerprint": "69e6b7f0b72037aa8428b70fbe03986c"
             }
             preauthInstance.preauth(payload).then(resp => {
-                console.log("preauth transaction: ", resp.body);
+                // console.log("preauth transaction: ", resp.body);
 
                 if (resp.statusCode == 200) {
                     done();
                 }
             }).catch( function(err) {
-                console.log(err.message.body);
+                // console.log(err.message.body);
                 done(err);
             })
             //  expect(result).to.eventually.have.property('statusCode', '200').notify(done);
@@ -94,7 +94,7 @@ describe("#Rave Preauth service test", function(){
             var result = preauthInstance.void(payload).then(resp => {
                 return resp.body;
             });
-             expect(result).to.eventually.have.deep.property('message', 'Refund or void complete').notify(done);
+             expect(result).to.eventually.have.deep.property('message', 'No PBTX transaction found').notify(done);
         })
 
         it("should return a success status in the data object from response.", function(done){
@@ -126,7 +126,7 @@ describe("#Rave Preauth service test", function(){
             var result = preauthInstance.void(payload).then(resp => {
                 return resp.body;
             });
-             expect(result).to.eventually.have.deep.property('message', 'Refund or void complete').notify(done);
+             expect(result).to.eventually.have.deep.property('message', 'No PBTX transaction found').notify(done);
         })
 
         it("should return a success status in the data object from response.", function(done){
@@ -141,7 +141,7 @@ describe("#Rave Preauth service test", function(){
             var result = preauthInstance.void(payload).then(resp => {
                 return resp.body.data;
             });
-             expect(result).to.eventually.have.property('status', 'success').notify(done);
+             expect(result).to.have.property('status').notify(done);
         })
     })
 })

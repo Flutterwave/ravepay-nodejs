@@ -26,7 +26,7 @@ function service(data, _rave) {
         })
         .then(params => {
 
-            console.log(params)
+            // console.log(params)
 
 
 
@@ -36,7 +36,7 @@ function service(data, _rave) {
         })
         .then(response => {
 
-            console.log(response);
+            // console.log(response);
             d.resolve(response);
 
         })

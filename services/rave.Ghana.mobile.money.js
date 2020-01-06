@@ -31,7 +31,7 @@ function service(data, _rave) {
             params.payment_type = "mobilemoneygh";
             params.country = params.country || "GH";
 
-            console.log(params);
+            // console.log(params);
 
             return charge(params, _rave);
 

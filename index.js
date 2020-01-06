@@ -17,6 +17,7 @@ var virtualcards = require('./lib/rave.virtualcards')
 var bvn = require('./lib/rave.bvn')
 var virtualAccount = require('./lib/rave.bvn')
 var refund = require('./lib/rave.refund')
+var verifyTransaction=require('./lib/rave.verify.transaction')
 
 var Rave = function (public_key, public_secret, base_url_or_production_flag) {
 
@@ -40,6 +41,7 @@ var Rave = function (public_key, public_secret, base_url_or_production_flag) {
 	this.Bvn = new bvn(ravebase)
 	this.VirtualAccount= new virtualAccount 
 	this.Refund= new refund
+	this.verifyTransaction=new verifyTransaction
 
 	this.getIntegrityHash = function (data) {
 		return ravebase.getIntegrityHash(data);

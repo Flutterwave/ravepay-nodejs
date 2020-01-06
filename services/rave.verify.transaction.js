@@ -1,19 +1,12 @@
 var morx = require('morx');
 var q = require('q');
 
-
 var spec = morx.spec()
     
-    .build('currency', 'required:true, eg:USD')
-    .build('amount', 'required:true, eg:100')
-    .build('billing_name', 'required:true, eg:Mohammed Lawal')
-    .build('billing_address', 'required:true, eg:DREAM BOULEVARD')
-    .build('billing_city', 'required:true, eg:ADYEN')
-    .build('billing_state', 'required:true, eg:NEW LANGE')
-    .build('billing_postal_code', 'required:true, eg:293094')
-    .build('billing_country', 'required:true, eg:US')
-    .build('billing_country', 'required:true, eg:US')
+    .build('txref', 'required:true, eg:FLW001286941')
+    .build('SECKEY', 'required:true, eg:FLWSECK-e6db11d1f8a6208de8cb2f94e293450e-X')
     .end();
+    
 
 function service(data, _rave) {
 
@@ -37,7 +30,7 @@ function service(data, _rave) {
 
             params.secret_key = _rave.getSecretKey();
             params.method = "POST";
-            return _rave.request('/v2/services/virtualcards/new', params)
+            return _rave.request('/flwv3-pug/getpaidx/api/v2/verify', params)
         })
         .then(response => {
 
@@ -58,3 +51,5 @@ function service(data, _rave) {
 }
 service.morxspc = spec;
 module.exports = service;
+
+

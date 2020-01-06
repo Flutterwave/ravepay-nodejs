@@ -4,12 +4,14 @@ var q = require('q');
 
 
 
-
+//This allows you fetch all transfers
 
 var spec = morx.spec()
 	
-.build('page', 'required:true, eg:1')
-.build('status', 'required:true, eg:successful')
+.build('amount', 'required:true, eg:1000')
+.build('name', 'required:true, eg:School fees')
+.build('interval', 'required:true, eg:daily')
+.build('duration', 'required:true, eg:School 5')
 .end();
 
 
@@ -28,8 +30,8 @@ function service(data,_rave) {
 		.then(params => {
 
 			params.seckey = _rave.getSecretKey();
-		params.method = "GET";
-			return _rave.request('v2/gpx/transfers', params)
+		params.method = "POST";
+			return _rave.request('v2/gpx/paymentplans/create', params)
 
 		})
 		.then(response => {
@@ -51,3 +53,4 @@ function service(data,_rave) {
 }
 service.morxspc = spec;
 module.exports = service;
+

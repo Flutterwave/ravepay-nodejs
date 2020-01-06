@@ -23,7 +23,7 @@ function service(data, _rave) {
             // console.log(validated)
             var params = {}
             var params = validated.params;
-            console.log(params)
+            // console.log(params)
 
             return params;
            
@@ -42,11 +42,11 @@ function service(data, _rave) {
             delete params.id;
             // console.log("pramssssss delete", params);
 
-            return _rave.request(`v2/merchant/settlement/${id}`, params)
+            return _rave.request(`v2/merchant/settlements/${id}`, params)
         })
         .then(response => {
 
-            console.log(response);
+            // console.log(response);
             d.resolve(response);
 
 

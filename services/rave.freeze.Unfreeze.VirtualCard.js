@@ -25,7 +25,7 @@ function service(data, _rave) {
         })
         .then(params => {
 
-            console.log(params)
+            // console.log(params)
 
 
 

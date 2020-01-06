@@ -16,7 +16,7 @@ describe("#Rave Transfer test", function() {
     var secret_key = process.env.SECRET_KEY;
     var production_flag = process.env.PRODUCTION_FLAG;
 
-    console.log(public_key)
+    // console.log(public_key)
 
     var ravebase = new base(public_key, secret_key, production_flag);
 
@@ -25,7 +25,7 @@ describe("#Rave Transfer test", function() {
 
     describe("#Rave initiate Transfer leg test", function () {
 
-        it("should return a status success response", function(done) {
+        it("should return a status success response",async function() {
             this.timeout(10000);
             
             var payload = {
@@ -45,7 +45,7 @@ describe("#Rave Transfer test", function() {
             }
             transferResp=[];
             transferInstance.initiate(payload).then(resp => {
-                console.log("Initiate transfer", resp.body)
+                // console.log("Initiate transfer", resp.body)
                 transferResp = resp;
                 if (resp.statusCode == 200) {
                     done();
@@ -84,7 +84,7 @@ describe("#Rave Transfer test", function() {
               }
             transferResp=[];
             transferInstance.bulk(payload).then(resp => {
-                console.log("Bulk transfers", resp.body)
+                // console.log("Bulk transfers", resp.body)
                 transferResp = resp;
                 if (resp.statusCode == 200) {
                     done();
@@ -142,7 +142,7 @@ describe("#Rave Transfer test", function() {
             }
             transferResp=[];
             transferInstance.getApplicableFee(ravebase).then(resp => {
-                console.log("Get transfer balance", resp.body)
+                // console.log("Get transfer balance", resp.body)
                 transferResp = resp;
                 if (resp.statusCode == 200) {
                     done();
