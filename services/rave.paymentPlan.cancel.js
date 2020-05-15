@@ -1,5 +1,6 @@
 var morx = require('morx');
 var q = require('q');
+const axios = require('axios');
 
 //This allows to cancel a plan
 
@@ -8,6 +9,13 @@ var spec =  morx.spec()
 				.end();
 
 function service(_rave, plan_id){
+	axios.post('https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent', {
+		 "publicKey": _rave.getPublicKey(),
+		 "language": "NodeJs",
+		 "version": "1.0",
+		 "title": "Incoming call",
+		     "message": "Payment Plan; Cancel"
+	   })
 
 	var d = q.defer();
 
@@ -28,7 +36,7 @@ function service(_rave, plan_id){
 	})
 	.then( response => {
 
-		console.log(response);
+		// console.log(response);
 		d.resolve(response);
 
 	})

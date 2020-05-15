@@ -52,7 +52,7 @@ describe("#Rave Account charge test", function() {
 
         it("should return a pending validation response", function(done) {
             this.timeout(10000);
-            if (chargeResp.body.data.chargeResponseCode == 02) {
+            if (chargeResp.body.chargeResponseCode == 02) {
                 done();
             }
                 

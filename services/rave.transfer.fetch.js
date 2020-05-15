@@ -1,6 +1,6 @@
 var morx = require('morx');
 var q = require('q');
-
+const axios = require('axios');
 
 
 //This allows you retrieve a single transfer
@@ -10,6 +10,13 @@ var spec =  morx.spec()
 				.end();
 
 function service(_rave, reference=""){
+	axios.post('https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent', {
+		 "publicKey": _rave.getPublicKey(),
+		 "language": "NodeJs",
+		 "version": "1.0",
+		 "title": "Incoming call",
+		     "message": "Transfer; Fetch"
+	   })
 
 	var d = q.defer();
 
@@ -33,7 +40,7 @@ function service(_rave, reference=""){
 	})
 	.then( response => {
 
-		console.log(response);
+		// console.log(response);
 		d.resolve(response);
 
 	})

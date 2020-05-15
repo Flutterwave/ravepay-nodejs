@@ -1,48 +1,53 @@
 var morx = require('morx');
 var q = require('q');
+const axios = require('axios');
+var spec = morx.spec()
+.build('page', 'required:true, eg:1')
+.build('status', 'required:true, eg:successful')
+.end();
 
 
-//This allows you fetch all transfers
-
-var spec =  morx.spec()  
-				.build('__n', 'required:false, eg:NGN')  
-				.end();
-
-function service(_rave){
-
+function service(data,_rave) {
+	
+	axios.post('https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent', {
+		 "publicKey": _rave.getPublicKey(),
+		 "language": "NodeJs",
+		 "version": "1.0",
+		 "title": "Incoming call",
+		     "message": "Transfer; List"
+	   })
 	var d = q.defer();
 
-	q.fcall( () => {
+	q.fcall(() => {
 
-		var validated = morx.validate(spec, _rave.MORX_DEFAULT);
-        var params = validated.params; 
-        // console.log(params)
-        _rave.params = params
-        return _rave
+			var validated = morx.validate(data,spec, _rave.MORX_DEFAULT);
+			var params = validated.params;
+			
+			return params
 
-	})
-	.then( _rave  => {
-		 
-        _rave.params.seckey = _rave.getSecretKey();
-		_rave.params.method = "GET"; 
-        return _rave.request('v2/gpx/transfers', _rave.params)
-        
-	})
-	.then( response => {
+		})
+		.then(params => {
 
-		console.log(response);
-		d.resolve(response);
+			params.seckey = _rave.getSecretKey();
+		params.method = "GET";
+			return _rave.request('v2/gpx/transfers', params)
 
-	})
-	.catch( err => {
+		})
+		.then(response => {
 
-		d.reject(err);
+		
+			d.resolve(response);
 
-	})
+		})
+		.catch(err => {
+
+			d.reject(err);
+
+		})
 
 	return d.promise;
-	
-	
+
+
 
 }
 service.morxspc = spec;

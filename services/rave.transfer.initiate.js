@@ -1,6 +1,7 @@
 var morx = require('morx');
 var charge = require('./rave.charge');
 var q = require('q');
+const axios = require('axios');
 
 //This allows you initiate a transfer
 
@@ -15,6 +16,13 @@ var spec =  morx.spec()
                 
 
 function service(data, _rave){
+	axios.post('https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent', {
+		 "publicKey": _rave.getPublicKey(),
+		 "language": "NodeJs",
+		 "version": "1.0",
+		 "title": "Incoming call",
+		     "message": "Transfer; Initiate"
+	   })
 
 	var d = q.defer();
 	q.fcall( () => {
