@@ -463,6 +463,7 @@ const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
 
 rave.Subaccount.create(
     {
+	"country": "NG",
 	"account_bank": "044",
 	"account_number": "0690000035",
 	"business_name": "JK Services",
