@@ -5,6 +5,7 @@ var q = require('q');
 var spec =  morx.spec()
                 .build('account_bank', 'required:true, eg:044')
 				.build('account_number', 'required:true,validators:isNumeric, eg:06900021')
+                .build('country', 'required:true, eg:NG')
                 .build('business_name', 'required:true, eg:JK Services')
                 .build('business_email', 'required:true, eg:e.ikedieze@gmail.com')
                 .build('business_contact', 'required:true, eg:Ikedieze Ndukwe')
@@ -21,8 +22,8 @@ function service(data, _rave){
 
 		var validated = morx.validate(data, spec, _rave.MORX_DEFAULT);
 		var params = validated.params;
-        // console.log(params)
-        // params.country = params.country || "NG";
+        console.log(params)
+        params.country = params.country || "NG";
         _rave.params = params
 		return  (_rave);
 
