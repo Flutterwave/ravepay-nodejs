@@ -20,6 +20,7 @@ var spec = morx.spec()
     .build('payment_type', 'required:false, eg:mpesa')
     .build('is_mpesa', 'required:true, eg:"1"')
     .build('is_mpesa_lipa', 'required:true, eg:1')
+    .build('redirect_url', 'required:false')
     .end();
 
 function service(data, _rave) {

@@ -40,12 +40,12 @@ function service(data, _rave) {
             params.secret_key = _rave.getSecretKey();
             params.method = "POST";
             
-            return _rave.request('/v2/services/virtualcards/'+card_id+'/status/'+status_action, params)
+            return _rave.request('/v2/services/virtualcards/'+params.card_id+'/status/'+params.status_action, params)
         })
         .then(response => {
 
             // console.log(response);
-            d.resolve(response);
+            d.resolve(response.body);
 
         })
         .catch(err => {

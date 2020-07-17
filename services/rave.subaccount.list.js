@@ -2,16 +2,18 @@ var morx = require('morx');
 var q = require('q');
 
 var spec =  morx.spec()  
-				.build('__n', 'required:false, eg:NGN')  
+				.build('account_number', 'required:false')  
+				.build('account_bank', 'required:false') 
+				.build('bank_name','required:false')  
 				.end();
 
-function service(_rave){
+function service(data,_rave){
 
 	var d = q.defer();
 
 	q.fcall( () => {
 
-		var validated = morx.validate(spec, _rave.MORX_DEFAULT);
+		var validated = morx.validate(data,spec, _rave.MORX_DEFAULT);
         var params = validated.params; 
         // console.log(params)
         _rave.params = params
@@ -29,7 +31,7 @@ function service(_rave){
 	.then( response => {
 
 		// console.log(response);
-		d.resolve(response);
+		d.resolve(response.body);
 
 	})
 	.catch( err => {

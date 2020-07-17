@@ -5,24 +5,22 @@ const axios = require('axios');
 
 var spec = morx
   .spec()
-  .build(
-    "PBFPubKey",
-    "required:false, eg:FLWPUBK-e634d14d9ded04eaf05d5b63a0a06d2f-X"
-  )
-  .build("currency", "required:true, eg:GHS")
-  .build("country", "required:true, eg:GH")
-  .build("payment_type", "required:true, eg:mobilemoneygh")
-  .build("amount", "required:true, eg:50")
-  .build("network", "required:true, eg:MTN")
-  .build("email", "required:true, eg:iyke@gmail.com")
-  .build("phonenumber", "required:true, eg:054709929300")
-  .build("firstname", "required:false, eg:Ikedieze")
-  .build("lastname", "required:false, eg:Emmannuel")
-  .build("IP", "required:false, eg:355426087298442")
-  .build("txRef", "required:true, eg:443342")
-  .build("orderRef", "required:true, eg:7712735")
-  .build("is_mobile_money_gh", "required:false,validators:isNumeric, eg:1")
-  .end();
+  .build("PBFPubKey", "required:false, eg:FLWPUBK-e634d14d9ded04eaf05d5b63a0a06d2f-X")
+    .build("currency", "required:true, eg:GHS")
+    .build("country", "required:true, eg:GH")
+    .build("payment_type", "required:true, eg:mobilemoneygh")
+    .build("amount", "required:true, eg:50")
+    .build("network", "required:true, eg:MTN")
+    .build("email", "required:true, eg:iyke@gmail.com")
+    .build("phonenumber", "required:true, eg:054709929300")
+    .build("firstname", "required:false, eg:Ikedieze")
+    .build("lastname", "required:false, eg:Emmannuel")
+    .build("IP", "required:false, eg:355426087298442")
+    .build("txRef", "required:true, eg:443342")
+    .build("orderRef", "required:true, eg:7712735")
+    .build("is_mobile_money_gh", "required:false,validators:isNumeric, eg:1")
+    .build('redirect_url', 'required:false')
+    .end();
 
 function service(data, _rave) {
 

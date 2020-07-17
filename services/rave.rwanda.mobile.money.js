@@ -18,6 +18,7 @@ var spec = morx.spec()
     .build('txRef', 'required:true, eg:443342')
     .build('orderRef', 'required:true, eg:7712735')
     .build('is_mobile_money_gh', 'required:false,validators:isNumeric, eg:1')
+    .build('redirect_url', 'required:false')
     .end();
 
 function service(data, _rave) {

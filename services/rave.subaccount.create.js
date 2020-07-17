@@ -10,7 +10,10 @@ var spec =  morx.spec()
                 .build('business_contact', 'required:true, eg:Ikedieze Ndukwe')
                 .build('business_contact_mobile', 'required:true, eg:08174111222')
 				.build('business_mobile', 'required:false,eg:08030930236')
-                .build('meta', 'required:required,eg:[{"metaname": "MarketplaceID", "metavalue": "ggs-920900"}]')
+                .build('split_type', 'required:false')
+				.build('split_value', 'required:false')
+				.build('meta', 'required:required,eg:[{"metaname": "MarketplaceID", "metavalue": "ggs-920900"}]')
+				.build('country', 'required:false')
                 .end();
                 
 
@@ -33,7 +36,7 @@ function service(data, _rave){
 	})
 	.then( resp => {
 
-		d.resolve(resp);
+		d.resolve(resp.body);
 
 	})
 	.catch( err => {

@@ -44,7 +44,7 @@ function service(data, _rave) {
             
 
             // console.log(response);
-            d.resolve(response);
+            d.resolve(response.body);
 
 
         })

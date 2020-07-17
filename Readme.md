@@ -57,7 +57,7 @@ const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, true); //Base url is 'http://a
 ```javascript
 const Ravepay = require('flutterwave-node');
 
-const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
+const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY,  PRODUCTION_FLAG);
 
 rave.Card.charge(
     {
@@ -102,7 +102,7 @@ Get a more detailed overview of card payments with Rave [here](https://medium.co
 
 const Ravepay = require("flutterwave-node");
 
-const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
+const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY,  PRODUCTION_FLAG);
 
 const tokenCharge = async () => {
 	const payload = {
@@ -185,7 +185,7 @@ This is called to start a transfer. The payload should contain the following car
 ```javascript
 const Ravepay = require('flutterwave-node');
 
-const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
+const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY,  PRODUCTION_FLAG);
 
 const transfer = async () => {
     try {
@@ -242,7 +242,7 @@ This allows you send bulk transfers.
 ```javascript
 const Ravepay = require('flutterwave-node';
 
-const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
+const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY,  PRODUCTION_FLAG);
 
 const Bulktransfer = async () => {
     try {
@@ -299,7 +299,7 @@ It uses a GET method.
 ```javascript
 const Ravepay = require('flutterwave-node';
 
-const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
+const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY,  PRODUCTION_FLAG);
 
 const fetchtransfer = async (ref) => {
     try {
@@ -357,7 +357,7 @@ This allows you fetch all transfers using a GET method
 ```javascript
 const Ravepay = require('flutterwave-node';
 
-const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
+const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY,  PRODUCTION_FLAG);
 
 const listTransfer = async () => {
     try {
@@ -382,7 +382,7 @@ This retrieves the fee for a transfer
 ```javascript
 const Ravepay = require('flutterwave-node';
 
-const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
+const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY,  PRODUCTION_FLAG);
 
 const getFee = async () => {
     try {
@@ -407,7 +407,7 @@ This helps you get your balance for transfers.
 ```javascript
 const Ravepay = require('flutterwave-node';
 
-const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
+const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, PRODUCTION_FLAG);
 
 const getBalance = async (currency) => {
     try {
@@ -451,6 +451,10 @@ This is used to create and manage subaccounts
 
 * ```.fetch()```
 
+* ```.delete()```
+
+* ```.update()```
+
 <br>
 
 ### ```.create()```
@@ -459,27 +463,33 @@ This function helps you to create a subaccount on rave.
 ```javascript
 const Ravepay = require('flutterwave-node');
 
-const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
+const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, PRODUCTION_FLAG);
 
-rave.Subaccount.create(
-    {
-	"country": "NG",
-	"account_bank": "044",
-	"account_number": "0690000035",
-	"business_name": "JK Services",
-	"business_email": "jk@services.com",
-	"business_contact": "Seun Alade",
-	"business_contact_mobile": "090890382",
-	"business_mobile": "09087930450",
-	"meta": [{"metaname": "MarketplaceID", "metavalue": "ggs-920900"}]
+const createSubAcct=  async ()=>{
+
+    const payload = {
+        "account_bank": "044",
+        "account_number": "0690000035",
+        "business_name": "JK Services",
+        "business_email": "jk@services.com",
+        "business_contact": "Seun Alade",
+        "business_contact_mobile": "090890382",
+        "business_mobile": "09087930450",
+        "country":"NG",
+        "meta": [{"metaname": "MarketplaceID", "metavalue": "ggs-920900"}]
+    }
+    try {
+       const response =  await rave.Subaccount.create(payload)
+       console.log(response);
+    } catch (error) {
+        console.log(error)
+    }                            
+   
 }
-).then(resp => {
-    console.log(resp.body);
-    
-}).catch(err => {
-    console.log(err);
-    
-})
+
+
+createSubAcct();
+
 ```
 #### Returns
 This call returns:
@@ -519,28 +529,104 @@ A sample ```.err``` contains
 This allows you to list all or specific subaccounts.
 
 ```javascript
-rave.Subaccount.list() 
-    .then(resp => {
-        console.log(resp.body);
+const Ravepay = require('flutterwave-node');
 
-    }).catch(err => {
-        console.log(err);
-        
-    })
+const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, PRODUCTION_FLAG);
+
+const listSubAcct=  async ()=>{
+
+   
+    try {
+       const response =  await rave.Subaccount.list()
+       console.log(response);
+    } catch (error) {
+        console.log(error)
+    }                            
+   
+}
+
+
+listSubAcct();
+
 ```
 
 ### ```.fetch()```
 This allows you fetch a single subaccount using the subaccount ID
 
 ```javascript
-rave.Subaccount.fetch(subaccount_id) 
-    .then(resp => {
-        console.log(resp.body);
-        
-    }).catch(err => {
-        console.log(err);
-        
-    })
+const fetchSubAcct = async () => {
+
+    const payload = {
+        "id":"RS_467808290FFEC932CBE097DD5097A2"
+    }
+    try {
+        const response = await rave.Subaccount.fetch(payload)
+        console.log(response);
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+
+fetchSubAcct()
+```
+### ```.delete()```
+This allows you delete a single subaccount using the subaccount ID
+
+```javascript
+const Ravepay = require('flutterwave-node');
+
+const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, PRODUCTTION_FLAG);
+const deleteSubAcct = async () => {
+
+    const payload = {
+        "id":"RS_467808290FFEC932CBE097DD5097A28F"
+    }
+    try {
+        const response = await rave.Subaccount.delete(payload)
+        console.log(response);
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+
+deleteSubAcct();
+```
+
+### ```.update()```
+This allows you update a subaccount
+
+```javascript
+const Ravepay = require('flutterwave-node');
+
+const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, PRODUCTTION_FLAG);
+
+const updateSubAcct = async () => {
+
+    const payload = 	{
+        "id": "RS_C5B5E474258921E0BD524C12A5008DA1", //The is the subaccount ID, you can get it from the List Subaccount 
+        "account_number": "0690000034",
+        "business_name": "Synergy Alliance",
+        "business_email": "ted@synergyalliance.com",
+        "account_bank": "044",
+        "split_type": "flat",
+        "split_value": "200"
+      }
+    try {
+        const response = await rave.Subaccount.update(payload)
+        console.log(response);
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+
+updateSubAcct();
+
 ```
 
 
@@ -1092,7 +1178,7 @@ const franco_mobilemoney=  async ()=>{
   "orderRef": "MC_" + Date.now(),
   "is_mobile_money_franco": 1,
   "device_fingerprint": "69e6b7f0b72037aa8428b70fbe03986c"
-   }
+}
     try {
        const response =  await rave.MobileMoney.francophone(payload)
        console.log(response);
@@ -1106,6 +1192,23 @@ const franco_mobilemoney=  async ()=>{
 franco_mobilemoney();
 
 ```
+```javascript
+//XOF sample payload
+
+{ "currency": "XAF",
+  "amount": "50",
+  "email": "user@example.com",
+  "phonenumber": "054709929220",
+  "firstname": "temi",
+  "lastname": "desola",
+  "IP": "355426087298442",
+  "txRef": "MC-" + Date.now(),
+  "orderRef": "MC_" + Date.now(),
+  "is_mobile_money_franco": 1,
+  "device_fingerprint": "69e6b7f0b72037aa8428b70fbe03986c"
+}
+```
+
 ****Redirect customer to the link returned in the charge initiation response redirect to data.link****
 
 ## BVN Verification
@@ -1456,7 +1559,7 @@ const Ravepay = require('flutterwave-node');
 
 const rave = new Ravepay(PUBLIC_KEY, SECRET_KEY, false);
 
-onst create_virtual_account = async ()=> {
+const create_virtual_account = async ()=> {
 	const payload = {
 	 email: "user@example.com",
 	is_permanent: true
@@ -1480,7 +1583,8 @@ create_virtual_account();
 
 **duration:** This is represented in days e.g. passing 2 means 2 days. It is the expiry date for the account number. Setting to 2 would mean you want the account number to exist for 2 days before expiring.**
 
-```
+```javascript
+
 const Ravepay = require('flutterwave-node');
 
 const rave = new Ravepay(PUBLIC_KEY, SECRET_KEY, false);
@@ -1749,7 +1853,6 @@ const get_balance= async ()=> {
 	} catch (error) {
 		console.log(error);
 	}
-};
 
 get_balance();
 
