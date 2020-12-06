@@ -304,6 +304,7 @@ interface AccountValidateRequest {
 
 interface TokenCharge {
     card(data: TokenChargeCardRequest): AxiosResponse<TokenChargeCardResponse>
+    account(data: TokenChargeCardRequest): AxiosResponse<TokenChargeCardResponse>
 }
 
 interface TokenChargeCardRequest {
