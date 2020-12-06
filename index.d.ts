@@ -175,6 +175,7 @@ interface CardValidateResponse extends BaseResponse {
 
 interface Status {
     requery(data: StatusRequeryRequest): AxiosResponse<StatusRequeryResponse>
+    xrequery(data: StatusXqequeryRequest)
 }
 
 interface StatusRequeryRequest {
@@ -255,4 +256,11 @@ interface StatusRequeryResponse extends BaseResponse {
             }
         ]
     }
+}
+
+interface StatusXqequeryRequest {
+    flwref?: string,
+    txref?: string,
+    last_attempt?: string,
+    only_successful?: string,
 }
