@@ -992,6 +992,7 @@ interface PaymentplanEditResponse {
 
 interface MobileMoney {
     mpesa(data: MobileMoneyMpesaRequest): AxiosResponse<MobileMoneyMpesaResponse>
+    ghana(data: MobileMoneyGhanaRequest): AxiosResponse<MobileMoneyGhanaResponse>
 }
 
 interface MobileMoneyMpesaRequest {
@@ -1042,5 +1043,79 @@ interface MobileMoneyMpesaResponse extends BaseResponse {
         updatedAt: string,
         createdAt: string,
         business_number: string
+    }
+}
+
+interface MobileMoneyGhanaRequest {
+    currency: string,
+    country: string,
+    payment_type: string,
+    amount: string,
+    network: string,
+    email: string,
+    phonenumber: string,
+    firstname?: string,
+    lastname?: string,
+    subaccounts?: string,
+    IP?: string,
+    txRef: string,
+    orderRef: string,
+    voucher: string,
+    is_mobile_money_gh: string,
+    device_fingerprint: string,
+}
+
+interface MobileMoneyGhanaResponse {
+    data: {
+        id: number,
+        txRef: number,
+        orderRef: null,
+        flwRef: number,
+        redirectUrl: number,
+        device_fingerprint: number,
+        settlement_token: null,
+        cycle: number,
+        amount: number,
+        charged_amount: number,
+        appfee: number,
+        merchantfee: number,
+        merchantbearsfee: number,
+        chargeResponseCode: number,
+        raveRef: null,
+        chargeResponseMessage: number,
+        authModelUsed: number,
+        currency: number,
+        IP: number,
+        narration: number,
+        status: number,
+        vbvrespmessage: number,
+        authurl: number,
+        vbvrespcode: number,
+        acctvalrespmsg: null,
+        acctvalrespcode: null,
+        paymentType: number,
+        paymentPlan: null,
+        paymentPage: null,
+        paymentId: number,
+        fraud_status: number,
+        charge_type: number,
+        is_live: number,
+        createdAt: number,
+        updatedAt: number,
+        deletedAt: null,
+        customerId: number,
+        AccountId: number,
+        customer: {
+            id: number,
+            phone: number,
+            fullName: number,
+            customertoken: null,
+            email: number,
+            createdAt: number,
+            updatedAt: number,
+            deletedAt: null,
+            AccountId: number
+        },
+        validateInstructions: number
     }
 }
