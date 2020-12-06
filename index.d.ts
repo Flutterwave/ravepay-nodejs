@@ -23,6 +23,7 @@ export default class Rave {
     VerifyTransaction: VerifyTransaction
     BillsPayment: BillsPayment
     Settlement: Settlement
+    USSD: USSD
 }
 
 interface BaseResponse {
@@ -341,78 +342,78 @@ interface TokenChargeCardRequest {
 
 interface TokenChargeCardResponse extends BaseResponse {
     data: {
-        "txid": number,
-        "txref": string,
-        "flwref": string,
-        "devicefingerprint": string,
-        "cycle": string,
-        "amount": number,
-        "currency": string,
-        "chargedamount": number,
-        "appfee": number,
-        "merchantfee": number,
-        "merchantbearsfee": number,
-        "chargecode": string,
-        "chargemessage": string,
-        "authmodel": string,
-        "ip": string,
-        "narration": string,
-        "status": string,
-        "vbvcode": string,
-        "vbvmessage": string,
-        "authurl": string,
-        "acctcode": any,
-        "acctmessage": any,
-        "paymenttype": string,
-        "paymentid": string,
-        "fraudstatus": string,
-        "chargetype": string,
-        "createdday": number,
-        "createddayname": string,
-        "createdweek": number,
-        "createdmonth": number,
-        "createdmonthname": string,
-        "createdquarter": number,
-        "createdyear": number,
-        "createdyearisleap": false,
-        "createddayispublicholiday": number,
-        "createdhour": number,
-        "createdminute": number,
-        "createdpmam": string,
-        "created": string,
-        "customerid": number,
-        "custphone": string,
-        "custnetworkprovider": string,
-        "custname": string,
-        "custemail": string,
-        "custemailprovider": string,
-        "custcreated": string,
-        "accountid": number,
-        "acctbusinessname": string,
-        "acctcontactperson": string,
-        "acctcountry": string,
-        "acctbearsfeeattransactiontime": number,
-        "acctparent": number,
-        "acctvpcmerchant": string,
-        "acctalias": string,
-        "acctisliveapproved": number,
-        "orderref": string,
-        "paymentplan": any,
-        "paymentpage": any,
-        "raveref": string,
-        "amountsettledforthistransaction": number,
-        "card": {
-            "expirymonth": string,
-            "expiryyear": string,
-            "cardBIN": string,
-            "last4digits": string,
-            "brand": string,
-            "card_tokens": {
-                "embedtoken": string,
-                "shortcode": string,
-                "expiry": string
+        txid: number,
+        txref: string,
+        flwref: string,
+        devicefingerprint: string,
+        cycle: string,
+        amount: number,
+        currency: string,
+        chargedamount: number,
+        appfee: number,
+        merchantfee: number,
+        merchantbearsfee: number,
+        chargecode: string,
+        chargemessage: string,
+        authmodel: string,
+        ip: string,
+        narration: string,
+        status: string,
+        vbvcode: string,
+        vbvmessage: string,
+        authurl: string,
+        acctcode: any,
+        acctmessage: any,
+        paymenttype: string,
+        paymentid: string,
+        fraudstatus: string,
+        chargetype: string,
+        createdday: number,
+        createddayname: string,
+        createdweek: number,
+        createdmonth: number,
+        createdmonthname: string,
+        createdquarter: number,
+        createdyear: number,
+        createdyearisleap: boolean,
+        createddayispublicholiday: number,
+        createdhour: number,
+        createdminute: number,
+        createdpmam: string,
+        created: string,
+        customerid: number,
+        custphone: string,
+        custnetworkprovider: string,
+        custname: string,
+        custemail: string,
+        custemailprovider: string,
+        custcreated: string,
+        accountid: number,
+        acctbusinessname: string,
+        acctcontactperson: string,
+        acctcountry: string,
+        acctbearsfeeattransactiontime: number,
+        acctparent: number,
+        acctvpcmerchant: string,
+        acctalias: string,
+        acctisliveapproved: number,
+        orderref: string,
+        paymentplan: any,
+        paymentpage: any,
+        raveref: string,
+        amountsettledforthistransaction: number,
+        card: {
+            expirymonth: string,
+            expiryyear: string,
+            cardBIN: string,
+            last4digits: string,
+            brand: string,
+            card_tokens: {
+                embedtoken: string,
+                shortcode: string,
+                expiry: string
             }[],
-            "life_time_token": string
+            life_time_token: string
         }
     }
 }
@@ -1522,7 +1523,7 @@ interface VirtualCardsTerminateResponse extends BaseResponse {
         send_to: string,
         AccountId: number,
         date_created: string,
-        is_active: false
+        is_active: boolean
     }
 }
 
@@ -1733,7 +1734,7 @@ interface SettlementListResponse extends BaseResponse {
             due_date: string,
             processed_date: any,
             status: string,
-            is_local: false,
+            is_local: boolean,
             currency: string,
             gross_amount: number,
             appfees: number,
@@ -1752,7 +1753,7 @@ interface SettlementListResponse extends BaseResponse {
             meta: any,
             refund_meta: string,
             chargeback_meta: any,
-            is_batch: false,
+            is_batch: boolean,
             cron_status: string,
             source_bankcode: any,
             created_at: string,
@@ -1837,5 +1838,45 @@ interface SettlementFetchResponse extends BaseResponse {
             }[]
         },
         settlement_cycle: any
+    }
+}
+
+interface USSD {
+    charge(data: USSDChargeRequest): AxiosResponse<USSDChargeResponse>
+}
+
+interface USSDChargeRequest {
+    currency: string,
+    country: string,
+    payment_type?: string,
+    amount: string,
+    email: string,
+    phonenumber?: string,
+    firstname?: string,
+    lastname?: string,
+    IP?: string,
+    txRef: string,
+    orderRef: string,
+    is_ussd: string,
+    device_fingerprint?: string,
+}
+
+interface USSDChargeResponse {
+    data: {
+        data: {
+            amount: string,
+            type: string,
+            redirect: boolean,
+            note: string,
+            transaction_date: string,
+            transaction_reference: string,
+            flw_reference: string,
+            redirect_url: any,
+            payment_code: string,
+            type_data: string,
+            meta_data: any
+        },
+        response_code: string,
+        response_message: string
     }
 }
