@@ -582,6 +582,7 @@ interface CustomRequest {
 
 interface Transfer {
     initiate(data: TransferInitiateRequest): AxiosResponse<TransferInitiateResponse>
+    bulk(data: TransferBulkRequest): AxiosResponse<TransferBulkResponse>
 }
 
 interface TransferInitiateRequest {
@@ -615,5 +616,19 @@ interface TransferInitiateResponse extends BaseResponse {
         requires_approval: number,
         is_approved: number,
         bank_name: string
+    }
+}
+
+interface TransferBulkRequest {
+    title: string,
+    bulk_data?: []
+}
+
+interface TransferBulkResponse extends BaseResponse {
+    data: {
+        id: number,
+        uuid: number,
+        date_created: string,
+        approver: string
     }
 }
