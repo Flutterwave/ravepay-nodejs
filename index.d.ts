@@ -583,6 +583,7 @@ interface CustomRequest {
 interface Transfer {
     initiate(data: TransferInitiateRequest): AxiosResponse<TransferInitiateResponse>
     bulk(data: TransferBulkRequest): AxiosResponse<TransferBulkResponse>
+    fetch(data: TransferFetchRequest): AxiosResponse<TransferFetchResponse>
 }
 
 interface TransferInitiateRequest {
@@ -630,5 +631,39 @@ interface TransferBulkResponse extends BaseResponse {
         uuid: number,
         date_created: string,
         approver: string
+    }
+}
+
+interface TransferFetchRequest {
+    id: string,
+    reference: string,
+}
+
+interface TransferFetchResponse extends BaseResponse {
+    data: {
+        page_info: {
+            total: number,
+            current_page: number,
+            total_pages: number
+        },
+        transfers: [
+            {
+                id: number,
+                account_number: string,
+                bank_code: string,
+                fullname: string,
+                date_created: string,
+                currency: string,
+                amount: number,
+                fee: number,
+                status: string,
+                narration: string,
+                approver: null,
+                complete_message: string,
+                requires_approval: number,
+                is_approved: number,
+                bank_name: string
+            }
+        ]
     }
 }
