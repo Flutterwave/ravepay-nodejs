@@ -913,6 +913,7 @@ interface Paymentplan {
     create(data: PaymentplanCreateRequest): AxiosResponse<PaymentplanCreateResponse>
     list(data: PaymentplanListRequest): AxiosResponse<PaymentplanListResponse>
     fetch(data: PaymentplanFetchRequest): AxiosResponse<PaymentplanFetchResponse>
+    cancel(data: PaymentplanCancelRequest): AxiosResponse<PaymentplanCancelResponse>
 }
 
 interface PaymentplanCreateRequest {
@@ -967,5 +968,13 @@ interface PaymentplanFetchRequest {
 }
 
 interface PaymentplanFetchResponse {
+
+}
+
+interface PaymentplanCancelRequest {
+
+}
+
+interface PaymentplanCancelResponse {
 
 }
