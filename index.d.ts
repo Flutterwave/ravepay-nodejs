@@ -1,10 +1,12 @@
+import { AxiosResponse } from "axios";
+
 export default class Rave {
     constructor(publicKey: string, privateKey: string, productionFlag: boolean)
     Card: Card
 }
 
 interface Card {
-    charge(data: CardChargeRequest): CardChargeResponse
+    charge(data: CardChargeRequest): AxiosResponse<CardChargeResponse>
 }
 
 interface CardChargeRequest {
