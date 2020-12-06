@@ -1392,6 +1392,7 @@ interface VirtualCards {
     terminate(data: VirtualCardsTerminateRequest): AxiosResponse<VirtualCardsTerminateResponse>
     fund(data: VirtualCardsFundRequest): AxiosResponse<VirtualCardsFundResponse>
     fetchTransactions(data: VirtualCardsFetchTransactionsRequest): AxiosResponse<VirtualCardsFetchTransactionsResponse>
+    withdraw(data: VirtualCardsWithrawRequest): AxiosResponse<VirtualCardsWithrawResponse>
 }
 
 interface VirtualCardsCreateRequest {
@@ -1574,4 +1575,13 @@ interface VirtualCardsFetchTransactionsResponse extends BaseResponse {
     },
 
     Data: any
+}
+
+interface VirtualCardsWithrawRequest {
+    card_id: string,
+    amount: string,
+}
+
+interface VirtualCardsWithrawResponse extends BaseResponse {
+    Reference: string,
 }
