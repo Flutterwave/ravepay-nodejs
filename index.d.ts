@@ -588,6 +588,7 @@ interface Transfer {
     getApplicableFee(data: TransferGetApplicableFeeRequest): AxiosResponse<TransferGetApplicableFeeResponse>
     getBalance(data: TransferGetBalanceRequest): AxiosResponse<TransferGetBalanceResponse>
     retrieveStatusOfBulk(data: TransferRetrieveStatusOfBulkRequest): AxiosResponse<TransferRetrieveStatusOfBulkResponse>
+    accountVerification(data: TranferAccountVerificationRequest): AxiosResponse<TranferAccountVerificationResponse>
 }
 
 interface TransferInitiateRequest {
@@ -662,7 +663,7 @@ interface TransferFetchResponse extends BaseResponse {
                 fee: number,
                 status: string,
                 narration: string,
-                approver: null,
+                approver: any,
                 complete_message: string,
                 requires_approval: number,
                 is_approved: number,
@@ -696,7 +697,7 @@ interface TransferListResponse extends BaseResponse {
                 fee: number,
                 status: string,
                 narration: string,
-                approver: null,
+                approver: any,
                 complete_message: string,
                 requires_approval: number,
                 is_approved: number,
@@ -763,11 +764,33 @@ interface TransferRetrieveStatusOfBulkResponse extends BaseResponse {
             fee: number,
             status: string,
             narration: string,
-            approver: null,
+            approver: any,
             complete_message: string,
             requires_approval: number,
             is_approved: number,
             bank_name: string
         }[]
+    }
+}
+
+interface TranferAccountVerificationRequest {
+    recipientaccount: string,
+    destbankcode: string,
+    currency?: string,
+    country?: string,
+}
+
+interface TranferAccountVerificationResponse {
+    data: {
+        data: {
+            responsecode: string,
+            accountnumber: string,
+            accountname: string,
+            responsemessage: string,
+            phonenumber: any,
+            uniquereference: string,
+            internalreference: any
+        },
+        status: string
     }
 }
