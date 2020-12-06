@@ -448,6 +448,8 @@ interface Misc {
     getFee(data: MiscGetFeeRequest)
     getBalHist(data: MiscGetBalHistRequest)
     getBanks(data: MiscGetBanksRequest)
+    disburse(data: MiscDisburseRequest)
+    getBalance(data: MistGetBalanceRequest)
 }
 
 interface MiscGetFeeRequest {
@@ -466,4 +468,18 @@ interface MiscGetBalHistRequest {
 
 interface MiscGetBanksRequest {
     __n?: string,
+}
+
+interface MiscDisburseRequest {
+    bank_code: string,
+    account_number: string,
+    currency: string,
+    amount: string,
+}
+
+interface MistGetBalanceRequest {
+    service: string,
+    service_method: string,
+    service_version: string,
+    service_channel: string,
 }
