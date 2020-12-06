@@ -586,6 +586,7 @@ interface Transfer {
     fetch(data: TransferFetchRequest): AxiosResponse<TransferFetchResponse>
     list(data: TransferListRequest): AxiosResponse<TransferListResponse>
     getApplicableFee(data: TransferGetApplicableFeeRequest): AxiosResponse<TransferGetApplicableFeeResponse>
+    getBalance(data: TransferGetBalanceRequest): AxiosResponse<TransferGetBalanceResponse>
 }
 
 interface TransferInitiateRequest {
@@ -723,4 +724,18 @@ interface TransferGetApplicableFeeResponse extends BaseResponse {
             AccountId: number
         }
     ]
+}
+
+interface TransferGetBalanceRequest {
+    currency?: string,
+}
+
+interface TransferGetBalanceResponse extends BaseResponse {
+    data: {
+        Id: number,
+        ShortName: string,
+        WalletNumber: string,
+        AvailableBalance: number,
+        LedgerBalance: number
+    }
 }
