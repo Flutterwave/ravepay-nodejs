@@ -506,6 +506,7 @@ interface MiscListTransactionsRequest {
 interface Preauth {
     preauth(data: PreauthPreauthRequest)
     void(data: PreauthVoidRequest): AxiosResponse<PreauthVoidRespone>
+    refund(data: PreauthVoidRequest): AxiosResponse<PreauthVoidRespone>
 }
 
 interface PreauthPreauthRequest {
@@ -559,3 +560,4 @@ interface PreauthVoidRespone {
         "status": string
     }
 }
+
