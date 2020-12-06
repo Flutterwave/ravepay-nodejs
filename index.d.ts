@@ -14,6 +14,7 @@ export default class Rave {
     Transfer: Transfer
     Subaccount: Subaccount
     Subscription: Subscription
+    Paymentplan: Paymentplan
 }
 
 interface BaseResponse {
@@ -904,5 +905,30 @@ interface SubscriptionActivateRequest {
 }
 
 interface SubscriptionCancelRequest {
-    
+    id: string,
+    fetch_by_tx: string,
+}
+
+interface Paymentplan {
+    create(data: PaymentplanCreateRequest): AxiosResponse<PaymentplanCreateResponse>
+}
+
+interface PaymentplanCreateRequest {
+    amount: string,
+    name: string,
+    interval: string,
+    duration?: string,
+}
+
+interface PaymentplanCreateResponse extends BaseResponse {
+    data: {
+        id: number,
+        name: string,
+        amount: number,
+        interval: string,
+        duration: number,
+        status: string,
+        plan_token: string,
+        date_created: string
+    }
 }
