@@ -887,6 +887,7 @@ interface Subscription {
     list(data: SubscriptionListRequest)
     fetch(data: SubscriptionFetchRequest)
     activate(data: SubscriptionActivateRequest)
+    cancel(data: SubscriptionCancelRequest)
 }
 
 interface SubscriptionListRequest {
@@ -896,7 +897,12 @@ interface SubscriptionListRequest {
 interface SubscriptionFetchRequest {
     transaction_id: string
 }
+
 interface SubscriptionActivateRequest {
     id: string,
     fetch_by_tx: string,
+}
+
+interface SubscriptionCancelRequest {
+    
 }
