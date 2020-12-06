@@ -995,6 +995,7 @@ interface MobileMoney {
     ghana(data: MobileMoneyGhanaRequest): AxiosResponse<MobileMoneyGhanaResponse>
     zambia(data: MobileMoneyZambiaRequest): AxiosResponse<MobileMoneyZambiaResponse>
     rwanda(data: MobileMoneyRwandaRequest): AxiosResponse<MobileMoneyRwandaResponse>
+    francophone(data: MobileMoneyFrancophoneRequest): AxiosResponse<MobileMoneyFrancophoneResponse>
 }
 
 interface MobileMoneyMpesaRequest {
@@ -1067,7 +1068,7 @@ interface MobileMoneyGhanaRequest {
     device_fingerprint: string,
 }
 
-interface MobileMoneyGhanaResponse {
+interface MobileMoneyGhanaResponse extends BaseResponse {
     data: {
         id: number,
         txRef: number,
@@ -1141,7 +1142,7 @@ interface MobileMoneyZambiaRequest {
     device_fingerprint: string,
 }
 
-interface MobileMoneyZambiaResponse {
+interface MobileMoneyZambiaResponse extends BaseResponse {
     data: {
         id: number,
         txRef: string,
@@ -1215,7 +1216,7 @@ interface MobileMoneyRwandaRequest {
     device_fingerprint: string,
 }
 
-interface MobileMoneyRwandaResponse {
+interface MobileMoneyRwandaResponse extends BaseResponse {
     data: {
         id: number,
         txRef: string,
@@ -1267,5 +1268,43 @@ interface MobileMoneyRwandaResponse {
             AccountId: number
         },
         validateInstructions: string
+    }
+}
+
+interface MobileMoneyFrancophoneRequest {
+    currency: string,
+    country: string,
+    payment_type: string,
+    amount: string,
+    network: string,
+    email: string,
+    phonenumber: string,
+    firstname?: string,
+    lastname?: string,
+    subaccounts?: string,
+    IP?: string,
+    txRef: string,
+    orderRef: string,
+    voucher: string,
+    is_mobile_money_franco: string,
+    device_fingerprint: string,
+}
+
+interface MobileMoneyFrancophoneResponse extends BaseResponse {
+    data: {
+        data: {
+            amount: string,
+            type: string,
+            redirect: true,
+            note: any,
+            transaction_date: string,
+            transaction_reference: string,
+            flw_reference: string,
+            redirect_url: string,
+            payment_code: any,
+            type_data: string
+        },
+        response_code: string,
+        response_message: string
     }
 }
