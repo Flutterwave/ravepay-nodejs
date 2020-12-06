@@ -912,6 +912,7 @@ interface SubscriptionCancelRequest {
 interface Paymentplan {
     create(data: PaymentplanCreateRequest): AxiosResponse<PaymentplanCreateResponse>
     list(data: PaymentplanListRequest): AxiosResponse<PaymentplanListResponse>
+    fetch(data: PaymentplanFetchRequest): AxiosResponse<PaymentplanFetchResponse>
 }
 
 interface PaymentplanCreateRequest {
@@ -958,4 +959,13 @@ interface PaymentplanListResponse extends BaseResponse {
             }
         ]
     }
+}
+
+interface PaymentplanFetchRequest {
+    id?: string,
+    q?: string,
+}
+
+interface PaymentplanFetchResponse {
+
 }
