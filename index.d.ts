@@ -507,6 +507,7 @@ interface Preauth {
     preauth(data: PreauthPreauthRequest)
     void(data: PreauthVoidRequest): AxiosResponse<PreauthVoidRespone>
     refund(data: PreauthVoidRequest): AxiosResponse<PreauthVoidRespone>
+    captureCard(data: PreauthCaptureCardRequest)
 }
 
 interface PreauthPreauthRequest {
@@ -561,3 +562,7 @@ interface PreauthVoidRespone {
     }
 }
 
+interface PreauthCaptureCardRequest {
+    flwRef: string,
+    amount?: string,
+}
