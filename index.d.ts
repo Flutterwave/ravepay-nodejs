@@ -9,6 +9,7 @@ export default class Rave {
     MobileOptions: MobileOptions
     Misc: Misc
     Preauth: Preauth
+    security: security
 }
 
 interface BaseResponse {
@@ -565,4 +566,10 @@ interface PreauthVoidRespone {
 interface PreauthCaptureCardRequest {
     flwRef: string,
     amount?: string,
+}
+
+interface security {
+    getEncryptionKey(seckey: string): string
+    encrypt(key: string, text: string): string
+    getIntegrityHash(data: any, pubKey: string, seckey: string): string
 }
