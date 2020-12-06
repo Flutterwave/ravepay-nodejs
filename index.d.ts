@@ -886,6 +886,7 @@ interface SubaccountFetchResponse {
 interface Subscription {
     list(data: SubscriptionListRequest)
     fetch(data: SubscriptionFetchRequest)
+    activate(data: SubscriptionActivateRequest)
 }
 
 interface SubscriptionListRequest {
@@ -894,4 +895,8 @@ interface SubscriptionListRequest {
 
 interface SubscriptionFetchRequest {
     transaction_id: string
+}
+interface SubscriptionActivateRequest {
+    id: string,
+    fetch_by_tx: string,
 }
