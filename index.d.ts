@@ -20,6 +20,7 @@ export default class Rave {
     Bvn: Bvn
     VirtualAccount: VirtualAccount
     Refund: Refund
+    VerifyTransaction: VerifyTransaction
 }
 
 interface BaseResponse {
@@ -1670,4 +1671,16 @@ interface RefundRefundResponse extends BaseResponse {
         status: string,
         updatedAt: string
     },
+}
+
+interface VerifyTransaction {
+    verify(data: VerifyTransactionVerifyRequest): AxiosResponse<VerifyTransactionVerifyResponse>
+}
+
+interface VerifyTransactionVerifyRequest {
+    txref: string,
+}
+
+interface VerifyTransactionVerifyResponse extends BaseResponse {
+
 }
