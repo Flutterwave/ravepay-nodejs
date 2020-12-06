@@ -585,7 +585,7 @@ interface Transfer {
     bulk(data: TransferBulkRequest): AxiosResponse<TransferBulkResponse>
     fetch(data: TransferFetchRequest): AxiosResponse<TransferFetchResponse>
     list(data: TransferListRequest): AxiosResponse<TransferListResponse>
-
+    getApplicableFee(data: TransferGetApplicableFeeRequest): AxiosResponse<TransferGetApplicableFeeResponse>
 }
 
 interface TransferInitiateRequest {
@@ -705,3 +705,22 @@ interface TransferListResponse extends BaseResponse {
     }
 }
 
+interface TransferGetApplicableFeeRequest {
+    currency: string,
+    amount: string,
+}
+
+interface TransferGetApplicableFeeResponse extends BaseResponse {
+    data: [
+        {
+            id: number,
+            fee_type: string,
+            currency: string,
+            fee: number,
+            createdAt: string,
+            updatedAt: string,
+            deletedAt: string,
+            AccountId: number
+        }
+    ]
+}
