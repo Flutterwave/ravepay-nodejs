@@ -993,6 +993,7 @@ interface PaymentplanEditResponse {
 interface MobileMoney {
     mpesa(data: MobileMoneyMpesaRequest): AxiosResponse<MobileMoneyMpesaResponse>
     ghana(data: MobileMoneyGhanaRequest): AxiosResponse<MobileMoneyGhanaResponse>
+    zambia(data: MobileMoneyZambiaRequest): AxiosResponse<MobileMoneyZambiaResponse>
 }
 
 interface MobileMoneyMpesaRequest {
@@ -1069,11 +1070,11 @@ interface MobileMoneyGhanaResponse {
     data: {
         id: number,
         txRef: number,
-        orderRef: null,
+        orderRef: any,
         flwRef: number,
         redirectUrl: number,
         device_fingerprint: number,
-        settlement_token: null,
+        settlement_token: any,
         cycle: number,
         amount: number,
         charged_amount: number,
@@ -1081,7 +1082,7 @@ interface MobileMoneyGhanaResponse {
         merchantfee: number,
         merchantbearsfee: number,
         chargeResponseCode: number,
-        raveRef: null,
+        raveRef: any,
         chargeResponseMessage: number,
         authModelUsed: number,
         currency: number,
@@ -1091,31 +1092,105 @@ interface MobileMoneyGhanaResponse {
         vbvrespmessage: number,
         authurl: number,
         vbvrespcode: number,
-        acctvalrespmsg: null,
-        acctvalrespcode: null,
+        acctvalrespmsg: any,
+        acctvalrespcode: any,
         paymentType: number,
-        paymentPlan: null,
-        paymentPage: null,
+        paymentPlan: any,
+        paymentPage: any,
         paymentId: number,
         fraud_status: number,
         charge_type: number,
         is_live: number,
         createdAt: number,
         updatedAt: number,
-        deletedAt: null,
+        deletedAt: any,
         customerId: number,
         AccountId: number,
         customer: {
             id: number,
             phone: number,
             fullName: number,
-            customertoken: null,
+            customertoken: any,
             email: number,
             createdAt: number,
             updatedAt: number,
-            deletedAt: null,
+            deletedAt: any,
             AccountId: number
         },
         validateInstructions: number
+    }
+}
+
+interface MobileMoneyZambiaRequest {
+    currency: string,
+    country: string,
+    payment_type: string,
+    amount: string,
+    network: string,
+    email: string,
+    phonenumber: string,
+    firstname?: string,
+    lastname?: string,
+    subaccounts?: string,
+    IP?: string,
+    txRef: string,
+    orderRef: string,
+    voucher: string,
+    is_mobile_money_ug: string,
+    device_fingerprint: string,
+}
+
+interface MobileMoneyZambiaResponse {
+    data: {
+        id: number,
+        txRef: string,
+        orderRef: any,
+        flwRef: string,
+        redirectUrl: string,
+        device_fingerprint: string,
+        settlement_token: any,
+        cycle: string,
+        amount: number,
+        charged_amount: number,
+        appfee: number,
+        merchantfee: number,
+        merchantbearsfee: number,
+        chargeResponseCode: string,
+        raveRef: any,
+        chargeResponseMessage: string,
+        authModelUsed: string,
+        currency: string,
+        IP: string,
+        narration: string,
+        status: string,
+        vbvrespmessage: string,
+        authurl: string,
+        vbvrespcode: string,
+        acctvalrespmsg: any,
+        acctvalrespcode: any,
+        paymentType: string,
+        paymentPlan: any,
+        paymentPage: any,
+        paymentId: string,
+        fraud_status: string,
+        charge_type: string,
+        is_live: number,
+        createdAt: string,
+        updatedAt: string,
+        deletedAt: any,
+        customerId: number,
+        AccountId: number,
+        customer: {
+            id: number,
+            phone: string,
+            fullName: string,
+            customertoken: any,
+            email: string,
+            createdAt: string,
+            updatedAt: string,
+            deletedAt: any,
+            AccountId: number
+        },
+        validateInstructions: string
     }
 }
