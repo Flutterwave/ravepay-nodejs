@@ -1390,6 +1390,7 @@ interface VirtualCards {
     list(data: VirtualCardsListRequest): AxiosResponse<VirtualCardsListResponse>
     get(data: VirtualCardsGetRequest): AxiosResponse<VirtualCardsGetResponse>
     terminate(data: VirtualCardsTerminateRequest): AxiosResponse<VirtualCardsTerminateResponse>
+    fund(data: VirtualCardsFundRequest): AxiosResponse<VirtualCardsFundResponse>
 }
 
 interface VirtualCardsCreateRequest {
@@ -1515,4 +1516,14 @@ interface VirtualCardsTerminateResponse {
         date_created: string,
         is_active: false
     }
+}
+
+interface VirtualCardsFundRequest {
+    id: string,
+    amount: string,
+    debit_currency?: string
+}
+
+interface VirtualCardsFundResponse {
+    Reference: string
 }
