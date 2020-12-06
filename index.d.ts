@@ -451,6 +451,7 @@ interface Misc {
     disburse(data: MiscDisburseRequest)
     getBalance(data: MistGetBalanceRequest)
     exchange_rates(data: MiscExchangeRatesRequest)
+    list_transactions(data: MiscListTransactionsRequest)
 }
 
 interface MiscGetFeeRequest {
@@ -492,4 +493,11 @@ interface MiscExchangeRatesRequest {
     service_channel: string,
     service_channel_group: string,
     service_payload: string
+}
+
+interface MiscListTransactionsRequest {
+    seckey?: string,
+    from?: string,
+    to?: string,
+    page?: string,
 }
