@@ -799,6 +799,7 @@ interface TranferAccountVerificationResponse {
 interface Subaccount {
     create(data: SubaccountCreateRequest): AxiosResponse<SubaccountCreateResponse>
     list(data: SubaccountListRequest): AxiosResponse<SubaccountListResponse>
+    fetch(data: SubaccountFetchRequest): AxiosResponse<SubaccountFetchResponse>
 }
 
 interface SubaccountCreateRequest {
@@ -857,5 +858,26 @@ interface SubaccountListResponse {
             subaccount_id: string,
             bank_name: string
         }[]
+    }
+}
+
+interface SubaccountFetchRequest {
+    id: string,
+}
+
+interface SubaccountFetchResponse {
+    data: {
+        id: number,
+        account_number: string,
+        account_bank: string,
+        business_name: string,
+        fullname: string,
+        date_created: string,
+        meta: any,
+        split_ratio: number,
+        split_type: string,
+        split_value: number,
+        subaccount_id: string,
+        bank_name: string
     }
 }
