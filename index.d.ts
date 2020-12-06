@@ -884,12 +884,14 @@ interface SubaccountFetchResponse {
 }
 
 interface Subscription {
-    list(data: SubscriptionListRequest): AxiosResponse<SubscriptionListResponse>
+    list(data: SubscriptionListRequest)
+    fetch(data: SubscriptionFetchRequest)
 }
 
 interface SubscriptionListRequest {
     transaction_id: string,
 }
 
-interface SubscriptionListResponse {
+interface SubscriptionFetchRequest {
+    transaction_id: string
 }
