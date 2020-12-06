@@ -13,6 +13,7 @@ export default class Rave {
     CustomRequest: CustomRequest
     Transfer: Transfer
     Subaccount: Subaccount
+    Subscription: Subscription
 }
 
 interface BaseResponse {
@@ -880,4 +881,15 @@ interface SubaccountFetchResponse {
         subaccount_id: string,
         bank_name: string
     }
+}
+
+interface Subscription {
+    list(data: SubscriptionListRequest): AxiosResponse<SubscriptionListResponse>
+}
+
+interface SubscriptionListRequest {
+    transaction_id: string,
+}
+
+interface SubscriptionListResponse {
 }
