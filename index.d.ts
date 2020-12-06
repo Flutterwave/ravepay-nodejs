@@ -1884,6 +1884,7 @@ interface USSDChargeResponse {
 
 interface Ebills {
     create(data: EbillsCreateRequest): AxiosResponse<EbillsCreateResponse>
+    update(data: EbillsUpdateRequest): AxiosResponse<EbillsUpdateResponse>
 }
 
 interface EbillsCreateRequest {
@@ -1905,5 +1906,17 @@ interface EbillsCreateResponse extends BaseResponse {
         flwRef: string,
         txRef: string,
         chargeResponseMessage: string
+    }
+}
+
+interface EbillsUpdateRequest {
+    reference: string,
+    currency?: string,
+    amount: string,
+}
+
+interface EbillsUpdateResponse extends BaseResponse {
+    data: {
+        updated: boolean
     }
 }
