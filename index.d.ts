@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios";
+import { AxiosResponse, AxiosStatic } from "axios";
 
 export default class Rave {
     constructor(publicKey: string, privateKey: string, productionFlag: boolean)
@@ -17,6 +17,7 @@ export default class Rave {
     Paymentplan: Paymentplan
     MobileMoney: MobileMoney
     VirtualCards: VirtualCards
+    Bvn: Bvn
 }
 
 interface BaseResponse {
@@ -199,76 +200,74 @@ interface StatusRequeryRequest {
 
 interface StatusRequeryResponse extends BaseResponse {
     data: {
-        "txid": number,
-        "txref": string,
-        "flwref": string,
-        "devicefingerprint": string,
-        "cycle": string,
-        "amount": number,
-        "currency": string,
-        "chargedamount": number,
-        "appfee": number,
-        "merchantfee": number,
-        "merchantbearsfee": number,
-        "chargecode": string,
-        "chargemessage": string,
-        "authmodel": string,
-        "ip": string,
-        "narration": string,
-        "status": string,
-        "vbvcode": string,
-        "vbvmessage": string,
-        "authurl": string,
-        "acctcode": any,
-        "acctmessage": any,
-        "paymenttype": string,
-        "paymentid": string,
-        "fraudstatus": string,
-        "chargetype": string,
-        "createdday": number,
-        "createddayname": string,
-        "createdweek": number,
-        "createdmonth": number,
-        "createdmonthname": string,
-        "createdquarter": number,
-        "createdyear": number,
-        "createdyearisleap": boolean,
-        "createddayispublicholiday": number,
-        "createdhour": number,
-        "createdminute": number,
-        "createdpmam": string,
-        "created": string,
-        "customerid": number,
-        "custphone": any,
-        "custnetworkprovider": string,
-        "custname": string,
-        "custemail": string,
-        "custemailprovider": string,
-        "custcreated": string,
-        "accountid": number,
-        "acctbusinessname": string,
-        "acctcontactperson": string,
-        "acctcountry": string,
-        "acctbearsfeeattransactiontime": number,
-        "acctparent": number,
-        "acctvpcmerchant": number,
-        "acctalias": string,
-        "acctisliveapproved": number,
-        "orderref": string,
-        "paymentplan": any,
-        "paymentpage": any,
-        "raveref": string,
-        "meta": [
-            {
-                "id": number,
-                "metaname": string,
-                "metavalue": string,
-                "createdAt": string,
-                "updatedAt": string,
-                "deletedAt": any,
-                "getpaidTransactionId": number
-            }
-        ]
+        txid: number,
+        txref: string,
+        flwref: string,
+        devicefingerprint: string,
+        cycle: string,
+        amount: number,
+        currency: string,
+        chargedamount: number,
+        appfee: number,
+        merchantfee: number,
+        merchantbearsfee: number,
+        chargecode: string,
+        chargemessage: string,
+        authmodel: string,
+        ip: string,
+        narration: string,
+        status: string,
+        vbvcode: string,
+        vbvmessage: string,
+        authurl: string,
+        acctcode: any,
+        acctmessage: any,
+        paymenttype: string,
+        paymentid: string,
+        fraudstatus: string,
+        chargetype: string,
+        createdday: number,
+        createddayname: string,
+        createdweek: number,
+        createdmonth: number,
+        createdmonthname: string,
+        createdquarter: number,
+        createdyear: number,
+        createdyearisleap: boolean,
+        createddayispublicholiday: number,
+        createdhour: number,
+        createdminute: number,
+        createdpmam: string,
+        created: string,
+        customerid: number,
+        custphone: any,
+        custnetworkprovider: string,
+        custname: string,
+        custemail: string,
+        custemailprovider: string,
+        custcreated: string,
+        accountid: number,
+        acctbusinessname: string,
+        acctcontactperson: string,
+        acctcountry: string,
+        acctbearsfeeattransactiontime: number,
+        acctparent: number,
+        acctvpcmerchant: number,
+        acctalias: string,
+        acctisliveapproved: number,
+        orderref: string,
+        paymentplan: any,
+        paymentpage: any,
+        raveref: string,
+        meta: {
+            id: number,
+            metaname: string,
+            metavalue: string,
+            createdAt: string,
+            updatedAt: string,
+            deletedAt: any,
+            getpaidTransactionId: number
+        }[]
     }
 }
 
@@ -1594,4 +1593,26 @@ interface VirtualCardsFreezeUnfreezeRequest {
 }
 
 interface VirtualCardsFreezeUnfreezeResponse {
+}
+
+interface Bvn {
+    verification(data: BvnVerificationRequest): AxiosResponse<BvnVerificationResponse>
+}
+
+interface BvnVerificationRequest {
+    bvn: string
+}
+
+interface BvnVerificationResponse extends BaseResponse {
+    data: {
+        bvn: string,
+        first_name: string,
+        middle_name: string,
+        last_name: string,
+        date_of_birth: string,
+        phone_number: string,
+        registration_date: string,
+        enrollment_bank: string,
+        enrollment_branch: string
+    }
 }
