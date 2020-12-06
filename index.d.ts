@@ -269,6 +269,7 @@ interface StatusXqequeryRequest {
 
 interface Account {
     charge(data: AccountChargeRequest)
+    validate(data: AccountValidateRequest)
 }
 
 interface AccountChargeRequest {
@@ -293,4 +294,9 @@ interface AccountChargeRequest {
     payment_type?: string,
     is_internet_banking?: any,
     include_integrity_hash?: any
+}
+
+interface AccountValidateRequest {
+    otp: string | number,
+    transactionreference: string
 }
