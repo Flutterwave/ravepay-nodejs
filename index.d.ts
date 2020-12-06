@@ -447,6 +447,7 @@ interface MobileOptionsChargeUssdResponse extends BaseResponse {
 interface Misc {
     getFee(data: MiscGetFeeRequest)
     getBalHist(data: MiscGetBalHistRequest)
+    getBanks(data: MiscGetBanksRequest)
 }
 
 interface MiscGetFeeRequest {
@@ -461,4 +462,8 @@ interface MiscGetBalHistRequest {
     from: string,
     to: string,
     page: string,
+}
+
+interface MiscGetBanksRequest {
+    __n?: string,
 }
