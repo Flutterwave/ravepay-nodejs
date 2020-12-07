@@ -1,4 +1,5 @@
-import { AxiosResponse, AxiosStatic } from "axios";
+import { AxiosResponse } from "axios";
+
 
 export default class Rave {
     constructor(publicKey: string, privateKey: string, productionFlag: boolean)
@@ -33,8 +34,8 @@ interface BaseResponse {
 }
 
 interface Card {
-    charge(data: CardChargeRequest): AxiosResponse<CardChargeResponse>,
-    validate(data: CardValidateRequest): AxiosResponse<CardValidateResponse>
+    charge(data: CardChargeRequest): Promise<Promise<AxiosResponse<CardChargeResponse>>>,
+    validate(data: CardValidateRequest): Promise<AxiosResponse<CardValidateResponse>>
 
 }
 
@@ -196,8 +197,8 @@ interface CardValidateResponse extends BaseResponse {
 }
 
 interface Status {
-    requery(data: StatusRequeryRequest): AxiosResponse<StatusRequeryResponse>
-    xrequery(data: StatusXqequeryRequest)
+    requery(data: StatusRequeryRequest): Promise<AxiosResponse<StatusRequeryResponse>>
+    xrequery(data: StatusXqequeryRequest): Promise<AxiosResponse<any>>
 }
 
 interface StatusRequeryRequest {
@@ -286,8 +287,8 @@ interface StatusXqequeryRequest {
 }
 
 interface Account {
-    charge(data: AccountChargeRequest)
-    validate(data: AccountValidateRequest)
+    charge(data: AccountChargeRequest): Promise<AxiosResponse<any>>
+    validate(data: AccountValidateRequest): Promise<AxiosResponse<any>>
 }
 
 interface AccountChargeRequest {
@@ -320,8 +321,8 @@ interface AccountValidateRequest {
 }
 
 interface TokenCharge {
-    card(data: TokenChargeCardRequest): AxiosResponse<TokenChargeCardResponse>
-    account(data: TokenChargeCardRequest): AxiosResponse<TokenChargeCardResponse>
+    card(data: TokenChargeCardRequest): Promise<AxiosResponse<TokenChargeCardResponse>>
+    account(data: TokenChargeCardRequest): Promise<AxiosResponse<TokenChargeCardResponse>>
 }
 
 interface TokenChargeCardRequest {
@@ -420,7 +421,7 @@ interface TokenChargeCardResponse extends BaseResponse {
 }
 
 interface MobileOptions {
-    chargeUssd(data: MobileOptionsChargeUssdRequest): AxiosResponse<MobileOptionsChargeUssdResponse>
+    chargeUssd(data: MobileOptionsChargeUssdRequest): Promise<AxiosResponse<MobileOptionsChargeUssdResponse>>
 }
 
 interface MobileOptionsChargeUssdRequest {
@@ -460,13 +461,13 @@ interface MobileOptionsChargeUssdResponse extends BaseResponse {
 }
 
 interface Misc {
-    getFee(data: MiscGetFeeRequest)
-    getBalHist(data: MiscGetBalHistRequest)
-    getBanks(data: MiscGetBanksRequest)
-    disburse(data: MiscDisburseRequest)
-    getBalance(data: MistGetBalanceRequest)
-    exchange_rates(data: MiscExchangeRatesRequest)
-    list_transactions(data: MiscListTransactionsRequest)
+    getFee(data: MiscGetFeeRequest): Promise<AxiosResponse<any>>
+    getBalHist(data: MiscGetBalHistRequest): Promise<AxiosResponse<any>>
+    getBanks(data: MiscGetBanksRequest): Promise<AxiosResponse<any>>
+    disburse(data: MiscDisburseRequest): Promise<AxiosResponse<any>>
+    getBalance(data: MistGetBalanceRequest): Promise<AxiosResponse<any>>
+    exchange_rates(data: MiscExchangeRatesRequest): Promise<AxiosResponse<any>>
+    list_transactions(data: MiscListTransactionsRequest): Promise<AxiosResponse<any>>
 }
 
 interface MiscGetFeeRequest {
@@ -518,10 +519,10 @@ interface MiscListTransactionsRequest {
 }
 
 interface Preauth {
-    preauth(data: PreauthPreauthRequest)
-    void(data: PreauthVoidRequest): AxiosResponse<PreauthVoidRespone>
-    refund(data: PreauthVoidRequest): AxiosResponse<PreauthVoidRespone>
-    captureCard(data: PreauthCaptureCardRequest)
+    preauth(data: PreauthPreauthRequest): Promise<AxiosResponse<any>>
+    void(data: PreauthVoidRequest): Promise<AxiosResponse<PreauthVoidRespone>>
+    refund(data: PreauthVoidRequest): Promise<AxiosResponse<PreauthVoidRespone>>
+    captureCard(data: PreauthCaptureCardRequest): Promise<AxiosResponse<any>>
 }
 
 interface PreauthPreauthRequest {
@@ -588,18 +589,18 @@ interface security {
 }
 
 interface CustomRequest {
-    custom(path: string, data: any)
+    custom(path: string, data: any): Promise<AxiosResponse<any>>
 }
 
 interface Transfer {
-    initiate(data: TransferInitiateRequest): AxiosResponse<TransferInitiateResponse>
-    bulk(data: TransferBulkRequest): AxiosResponse<TransferBulkResponse>
-    fetch(data: TransferFetchRequest): AxiosResponse<TransferFetchResponse>
-    list(data: TransferListRequest): AxiosResponse<TransferListResponse>
-    getApplicableFee(data: TransferGetApplicableFeeRequest): AxiosResponse<TransferGetApplicableFeeResponse>
-    getBalance(data: TransferGetBalanceRequest): AxiosResponse<TransferGetBalanceResponse>
-    retrieveStatusOfBulk(data: TransferRetrieveStatusOfBulkRequest): AxiosResponse<TransferRetrieveStatusOfBulkResponse>
-    accountVerification(data: TranferAccountVerificationRequest): AxiosResponse<TranferAccountVerificationResponse>
+    initiate(data: TransferInitiateRequest): Promise<AxiosResponse<TransferInitiateResponse>>
+    bulk(data: TransferBulkRequest): Promise<AxiosResponse<TransferBulkResponse>>
+    fetch(data: TransferFetchRequest): Promise<AxiosResponse<TransferFetchResponse>>
+    list(data: TransferListRequest): Promise<AxiosResponse<TransferListResponse>>
+    getApplicableFee(data: TransferGetApplicableFeeRequest): Promise<AxiosResponse<TransferGetApplicableFeeResponse>>
+    getBalance(data: TransferGetBalanceRequest): Promise<AxiosResponse<TransferGetBalanceResponse>>
+    retrieveStatusOfBulk(data: TransferRetrieveStatusOfBulkRequest): Promise<AxiosResponse<TransferRetrieveStatusOfBulkResponse>>
+    accountVerification(data: TranferAccountVerificationRequest): Promise<AxiosResponse<TranferAccountVerificationResponse>>
 }
 
 interface TransferInitiateRequest {
@@ -807,9 +808,9 @@ interface TranferAccountVerificationResponse {
 }
 
 interface Subaccount {
-    create(data: SubaccountCreateRequest): AxiosResponse<SubaccountCreateResponse>
-    list(data: SubaccountListRequest): AxiosResponse<SubaccountListResponse>
-    fetch(data: SubaccountFetchRequest): AxiosResponse<SubaccountFetchResponse>
+    create(data: SubaccountCreateRequest): Promise<AxiosResponse<SubaccountCreateResponse>>
+    list(data: SubaccountListRequest): Promise<AxiosResponse<SubaccountListResponse>>
+    fetch(data: SubaccountFetchRequest): Promise<AxiosResponse<SubaccountFetchResponse>>
 }
 
 interface SubaccountCreateRequest {
@@ -893,10 +894,10 @@ interface SubaccountFetchResponse {
 }
 
 interface Subscription {
-    list(data: SubscriptionListRequest)
-    fetch(data: SubscriptionFetchRequest)
-    activate(data: SubscriptionActivateRequest)
-    cancel(data: SubscriptionCancelRequest)
+    list(data: SubscriptionListRequest): Promise<AxiosResponse<any>>
+    fetch(data: SubscriptionFetchRequest): Promise<AxiosResponse<any>>
+    activate(data: SubscriptionActivateRequest): Promise<AxiosResponse<any>>
+    cancel(data: SubscriptionCancelRequest): Promise<AxiosResponse<any>>
 }
 
 interface SubscriptionListRequest {
@@ -918,11 +919,11 @@ interface SubscriptionCancelRequest {
 }
 
 interface Paymentplan {
-    create(data: PaymentplanCreateRequest): AxiosResponse<PaymentplanCreateResponse>
-    list(data: PaymentplanListRequest): AxiosResponse<PaymentplanListResponse>
-    fetch(data: PaymentplanFetchRequest): AxiosResponse<PaymentplanFetchResponse>
-    cancel(data: PaymentplanCancelRequest): AxiosResponse<PaymentplanCancelResponse>
-    edit(data: PaymentplanEditRequest): AxiosResponse<PaymentplanEditRequest>
+    create(data: PaymentplanCreateRequest): Promise<AxiosResponse<PaymentplanCreateResponse>>
+    list(data: PaymentplanListRequest): Promise<AxiosResponse<PaymentplanListResponse>>
+    fetch(data: PaymentplanFetchRequest): Promise<AxiosResponse<PaymentplanFetchResponse>>
+    cancel(data: PaymentplanCancelRequest): Promise<AxiosResponse<PaymentplanCancelResponse>>
+    edit(data: PaymentplanEditRequest): Promise<AxiosResponse<PaymentplanEditRequest>>
 }
 
 interface PaymentplanCreateRequest {
@@ -998,12 +999,12 @@ interface PaymentplanEditResponse {
 }
 
 interface MobileMoney {
-    mpesa(data: MobileMoneyMpesaRequest): AxiosResponse<MobileMoneyMpesaResponse>
-    ghana(data: MobileMoneyGhanaRequest): AxiosResponse<MobileMoneyGhanaResponse>
-    zambia(data: MobileMoneyZambiaRequest): AxiosResponse<MobileMoneyZambiaResponse>
-    rwanda(data: MobileMoneyRwandaRequest): AxiosResponse<MobileMoneyRwandaResponse>
-    francophone(data: MobileMoneyFrancophoneRequest): AxiosResponse<MobileMoneyFrancophoneResponse>
-    uganda(data: MobileMoneyUgandaRequest): AxiosResponse<MobileMoneyUgandaResponse>
+    mpesa(data: MobileMoneyMpesaRequest): Promise<AxiosResponse<MobileMoneyMpesaResponse>>
+    ghana(data: MobileMoneyGhanaRequest): Promise<AxiosResponse<MobileMoneyGhanaResponse>>
+    zambia(data: MobileMoneyZambiaRequest): Promise<AxiosResponse<MobileMoneyZambiaResponse>>
+    rwanda(data: MobileMoneyRwandaRequest): Promise<AxiosResponse<MobileMoneyRwandaResponse>>
+    francophone(data: MobileMoneyFrancophoneRequest): Promise<AxiosResponse<MobileMoneyFrancophoneResponse>>
+    uganda(data: MobileMoneyUgandaRequest): Promise<AxiosResponse<MobileMoneyUgandaResponse>>
 }
 
 interface MobileMoneyMpesaRequest {
@@ -1392,15 +1393,15 @@ interface MobileMoneyUgandaResponse {
 }
 
 interface VirtualCards {
-    create(data: VirtualCardsCreateRequest): AxiosResponse<VirtualCardsCreateResponse>
-    list(data: VirtualCardsListRequest): AxiosResponse<VirtualCardsListResponse>
-    get(data: VirtualCardsGetRequest): AxiosResponse<VirtualCardsGetResponse>
-    terminate(data: VirtualCardsTerminateRequest): AxiosResponse<VirtualCardsTerminateResponse>
-    fund(data: VirtualCardsFundRequest): AxiosResponse<VirtualCardsFundResponse>
-    fetchTransactions(data: VirtualCardsFetchTransactionsRequest): AxiosResponse<VirtualCardsFetchTransactionsResponse>
-    withdraw(data: VirtualCardsWithrawRequest): AxiosResponse<VirtualCardsWithrawResponse>
-    freeze(data: VirtualCardsFreezeUnfreezeRequest): AxiosResponse<VirtualCardsFreezeUnfreezeResponse>
-    unfreeze(data: VirtualCardsFreezeUnfreezeRequest): AxiosResponse<VirtualCardsFreezeUnfreezeResponse>
+    create(data: VirtualCardsCreateRequest): Promise<AxiosResponse<VirtualCardsCreateResponse>>
+    list(data: VirtualCardsListRequest): Promise<AxiosResponse<VirtualCardsListResponse>>
+    get(data: VirtualCardsGetRequest): Promise<AxiosResponse<VirtualCardsGetResponse>>
+    terminate(data: VirtualCardsTerminateRequest): Promise<AxiosResponse<VirtualCardsTerminateResponse>>
+    fund(data: VirtualCardsFundRequest): Promise<AxiosResponse<VirtualCardsFundResponse>>
+    fetchTransactions(data: VirtualCardsFetchTransactionsRequest): Promise<AxiosResponse<VirtualCardsFetchTransactionsResponse>>
+    withdraw(data: VirtualCardsWithrawRequest): Promise<AxiosResponse<VirtualCardsWithrawResponse>>
+    freeze(data: VirtualCardsFreezeUnfreezeRequest): Promise<AxiosResponse<VirtualCardsFreezeUnfreezeResponse>>
+    unfreeze(data: VirtualCardsFreezeUnfreezeRequest): Promise<AxiosResponse<VirtualCardsFreezeUnfreezeResponse>>
 }
 
 interface VirtualCardsCreateRequest {
@@ -1603,7 +1604,7 @@ interface VirtualCardsFreezeUnfreezeResponse {
 }
 
 interface Bvn {
-    verification(data: BvnVerificationRequest): AxiosResponse<BvnVerificationResponse>
+    verification(data: BvnVerificationRequest): Promise<AxiosResponse<BvnVerificationResponse>>
 }
 
 interface BvnVerificationRequest {
@@ -1625,7 +1626,7 @@ interface BvnVerificationResponse extends BaseResponse {
 }
 
 interface VirtualAccount {
-    accountNumber(data: VirtualAccountAccountNumberRequest): AxiosResponse<VirtualAccountAccountNumberResponse>
+    accountNumber(data: VirtualAccountAccountNumberRequest): Promise<AxiosResponse<VirtualAccountAccountNumberResponse>>
 }
 
 interface VirtualAccountAccountNumberRequest {
@@ -1654,7 +1655,7 @@ interface VirtualAccountAccountNumberResponse extends BaseResponse {
 }
 
 interface Refund {
-    refund(data: RefundRefundRequest): AxiosResponse<RefundRefundResponse>
+    refund(data: RefundRefundRequest): Promise<AxiosResponse<RefundRefundResponse>>
 
 }
 
@@ -1678,7 +1679,7 @@ interface RefundRefundResponse extends BaseResponse {
 }
 
 interface VerifyTransaction {
-    verify(data: VerifyTransactionVerifyRequest): AxiosResponse<VerifyTransactionVerifyResponse>
+    verify(data: VerifyTransactionVerifyRequest): Promise<AxiosResponse<VerifyTransactionVerifyResponse>>
 }
 
 interface VerifyTransactionVerifyRequest {
@@ -1690,7 +1691,7 @@ interface VerifyTransactionVerifyResponse extends BaseResponse {
 }
 
 interface BillsPayment {
-    bills(data: BillsPaymentBillsRequest): AxiosResponse<BillsPaymentBillsResponse>
+    bills(data: BillsPaymentBillsRequest): Promise<AxiosResponse<BillsPaymentBillsResponse>>
 }
 
 interface BillsPaymentBillsRequest {
@@ -1705,8 +1706,8 @@ interface BillsPaymentBillsResponse extends BaseResponse {
 }
 
 interface Settlement {
-    list(data: SettlementListRequest): AxiosResponse<SettlementListResponse>
-    fetch(data: SettlementFetchRequest): AxiosResponse<SettlementFetchResponse>
+    list(data: SettlementListRequest): Promise<AxiosResponse<SettlementListResponse>>
+    fetch(data: SettlementFetchRequest): Promise<AxiosResponse<SettlementFetchResponse>>
 }
 
 interface SettlementListRequest {
@@ -1843,7 +1844,7 @@ interface SettlementFetchResponse extends BaseResponse {
 }
 
 interface USSD {
-    charge(data: USSDChargeRequest): AxiosResponse<USSDChargeResponse>
+    charge(data: USSDChargeRequest): Promise<AxiosResponse<USSDChargeResponse>>
 }
 
 interface USSDChargeRequest {
@@ -1883,8 +1884,8 @@ interface USSDChargeResponse {
 }
 
 interface Ebills {
-    create(data: EbillsCreateRequest): AxiosResponse<EbillsCreateResponse>
-    update(data: EbillsUpdateRequest): AxiosResponse<EbillsUpdateResponse>
+    create(data: EbillsCreateRequest): Promise<AxiosResponse<EbillsCreateResponse>>
+    update(data: EbillsUpdateRequest): Promise<AxiosResponse<EbillsUpdateResponse>>
 }
 
 interface EbillsCreateRequest {
