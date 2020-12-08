@@ -1,6 +1,11 @@
+// Type definitions for flutterwave-node 1.0
+// Project: https://github.com/Flutterwave/ravepay-nodejs
+// Definitions by: Besemuna <https://github.com/besemuna>
+// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
+
 import { AxiosResponse } from "axios";
 
-export default class Rave {
+declare class Rave {
   constructor(publicKey: string, privateKey: string, productionFlag: boolean);
   Card: Card;
   Status: Status;
@@ -27,12 +32,12 @@ export default class Rave {
   Ebills: Ebills;
 }
 
-export interface BaseResponse {
+interface BaseResponse {
   status: string;
   message: string;
 }
 
-export interface Card {
+interface Card {
   charge(
     data: CardChargeRequest
   ): Promise<Promise<AxiosResponse<CardChargeResponse>>>;
@@ -41,7 +46,7 @@ export interface Card {
   ): Promise<AxiosResponse<CardValidateResponse>>;
 }
 
-export interface CardChargeRequest {
+interface CardChargeRequest {
   token: string;
   currency: string;
   country?: string;
@@ -58,7 +63,7 @@ export interface CardChargeRequest {
   subaccounts?: [];
 }
 
-export interface CardChargeResponse extends BaseResponse {
+interface CardChargeResponse extends BaseResponse {
   data: {
     txid: number;
     txref: string;
@@ -136,12 +141,12 @@ export interface CardChargeResponse extends BaseResponse {
   };
 }
 
-export interface CardValidateRequest {
+interface CardValidateRequest {
   transaction_reference: string;
   otp?: string;
 }
 
-export interface CardValidateResponse extends BaseResponse {
+interface CardValidateResponse extends BaseResponse {
   data: {
     data: {
       responsecode: string;
@@ -202,19 +207,19 @@ export interface CardValidateResponse extends BaseResponse {
   };
 }
 
-export interface Status {
+interface Status {
   requery(
     data: StatusRequeryRequest
   ): Promise<AxiosResponse<StatusRequeryResponse>>;
   xrequery(data: StatusXqequeryRequest): Promise<AxiosResponse>;
 }
 
-export interface StatusRequeryRequest {
+interface StatusRequeryRequest {
   flwref?: string;
   txref?: string;
 }
 
-export interface StatusRequeryResponse extends BaseResponse {
+interface StatusRequeryResponse extends BaseResponse {
   data: {
     txid: number;
     txref: string;
@@ -287,19 +292,19 @@ export interface StatusRequeryResponse extends BaseResponse {
   };
 }
 
-export interface StatusXqequeryRequest {
+interface StatusXqequeryRequest {
   flwref?: string;
   txref?: string;
   last_attempt?: string;
   only_successful?: string;
 }
 
-export interface Account {
+interface Account {
   charge(data: AccountChargeRequest): Promise<AxiosResponse>;
   validate(data: AccountValidateRequest): Promise<AxiosResponse>;
 }
 
-export interface AccountChargeRequest {
+interface AccountChargeRequest {
   currency?: string;
   country?: string;
   amount: string;
@@ -323,12 +328,12 @@ export interface AccountChargeRequest {
   include_integrity_hash?: any;
 }
 
-export interface AccountValidateRequest {
+interface AccountValidateRequest {
   otp: string | number;
   transactionreference: string;
 }
 
-export interface TokenCharge {
+interface TokenCharge {
   card(
     data: TokenChargeCardRequest
   ): Promise<AxiosResponse<TokenChargeCardResponse>>;
@@ -337,7 +342,7 @@ export interface TokenCharge {
   ): Promise<AxiosResponse<TokenChargeCardResponse>>;
 }
 
-export interface TokenChargeCardRequest {
+interface TokenChargeCardRequest {
   token: string;
   currency: string;
   country?: string;
@@ -354,7 +359,7 @@ export interface TokenChargeCardRequest {
   subaccounts?: [];
 }
 
-export interface TokenChargeCardResponse extends BaseResponse {
+interface TokenChargeCardResponse extends BaseResponse {
   data: {
     txid: number;
     txref: string;
@@ -432,13 +437,13 @@ export interface TokenChargeCardResponse extends BaseResponse {
   };
 }
 
-export interface MobileOptions {
+interface MobileOptions {
   chargeUssd(
     data: MobileOptionsChargeUssdRequest
   ): Promise<AxiosResponse<MobileOptionsChargeUssdResponse>>;
 }
 
-export interface MobileOptionsChargeUssdRequest {
+interface MobileOptionsChargeUssdRequest {
   currency: string;
   country: string;
   payment_type?: string;
@@ -454,7 +459,7 @@ export interface MobileOptionsChargeUssdRequest {
   device_fingerprint?: string;
 }
 
-export interface MobileOptionsChargeUssdResponse extends BaseResponse {
+interface MobileOptionsChargeUssdResponse extends BaseResponse {
   data: {
     data: {
       amount: string;
@@ -474,7 +479,7 @@ export interface MobileOptionsChargeUssdResponse extends BaseResponse {
   };
 }
 
-export interface Misc {
+interface Misc {
   getFee(data: MiscGetFeeRequest): Promise<AxiosResponse>;
   getBalHist(data: MiscGetBalHistRequest): Promise<AxiosResponse>;
   getBanks(data: MiscGetBanksRequest): Promise<AxiosResponse>;
@@ -484,39 +489,39 @@ export interface Misc {
   list_transactions(data: MiscListTransactionsRequest): Promise<AxiosResponse>;
 }
 
-export interface MiscGetFeeRequest {
+interface MiscGetFeeRequest {
   amount: string | number;
   card6?: any;
   ptype?: any;
   currency?: string;
 }
 
-export interface MiscGetBalHistRequest {
+interface MiscGetBalHistRequest {
   currency: string;
   from: string;
   to: string;
   page: string;
 }
 
-export interface MiscGetBanksRequest {
+interface MiscGetBanksRequest {
   __n?: string;
 }
 
-export interface MiscDisburseRequest {
+interface MiscDisburseRequest {
   bank_code: string;
   account_number: string;
   currency: string;
   amount: string;
 }
 
-export interface MistGetBalanceRequest {
+interface MistGetBalanceRequest {
   service: string;
   service_method: string;
   service_version: string;
   service_channel: string;
 }
 
-export interface MiscExchangeRatesRequest {
+interface MiscExchangeRatesRequest {
   service: string;
   service_method: string;
   service_version: string;
@@ -525,21 +530,21 @@ export interface MiscExchangeRatesRequest {
   service_payload: string;
 }
 
-export interface MiscListTransactionsRequest {
+interface MiscListTransactionsRequest {
   seckey?: string;
   from?: string;
   to?: string;
   page?: string;
 }
 
-export interface Preauth {
+interface Preauth {
   preauth(data: PreauthPreauthRequest): Promise<AxiosResponse>;
   void(data: PreauthVoidRequest): Promise<AxiosResponse<PreauthVoidRespone>>;
   refund(data: PreauthVoidRequest): Promise<AxiosResponse<PreauthVoidRespone>>;
   captureCard(data: PreauthCaptureCardRequest): Promise<AxiosResponse>;
 }
 
-export interface PreauthPreauthRequest {
+interface PreauthPreauthRequest {
   cardno: string | number;
   currency?: string;
   suggested_auth?: string;
@@ -566,14 +571,14 @@ export interface PreauthPreauthRequest {
   include_integrity_hash?: string;
 }
 
-export interface PreauthVoidRequest {
+interface PreauthVoidRequest {
   id?: string;
   ref?: string;
   amount?: string;
   action?: string;
 }
 
-export interface PreauthVoidRespone extends BaseResponse {
+interface PreauthVoidRespone extends BaseResponse {
   data: {
     data: {
       responsecode: string;
@@ -591,22 +596,22 @@ export interface PreauthVoidRespone extends BaseResponse {
   };
 }
 
-export interface PreauthCaptureCardRequest {
+interface PreauthCaptureCardRequest {
   flwRef: string;
   amount?: string;
 }
 
-export interface security {
+interface security {
   getEncryptionKey(seckey: string): string;
   encrypt(key: string, text: string): string;
   getIntegrityHash(data: any, pubKey: string, seckey: string): string;
 }
 
-export interface CustomRequest {
+interface CustomRequest {
   custom(path: string, data: any): Promise<AxiosResponse>;
 }
 
-export interface Transfer {
+interface Transfer {
   initiate(
     data: TransferInitiateRequest
   ): Promise<AxiosResponse<TransferInitiateResponse>>;
@@ -629,7 +634,7 @@ export interface Transfer {
   ): Promise<AxiosResponse<TranferAccountVerificationResponse>>;
 }
 
-export interface TransferInitiateRequest {
+interface TransferInitiateRequest {
   account_bank?: string;
   account_number?: string;
   recipient?: string;
@@ -643,7 +648,7 @@ export interface TransferInitiateRequest {
   debit_currency?: string;
 }
 
-export interface TransferInitiateResponse extends BaseResponse {
+interface TransferInitiateResponse extends BaseResponse {
   data: {
     id: number;
     account_number: string;
@@ -663,12 +668,12 @@ export interface TransferInitiateResponse extends BaseResponse {
   };
 }
 
-export interface TransferBulkRequest {
+interface TransferBulkRequest {
   title: string;
   bulk_data?: [];
 }
 
-export interface TransferBulkResponse extends BaseResponse {
+interface TransferBulkResponse extends BaseResponse {
   data: {
     id: number;
     uuid: number;
@@ -677,12 +682,12 @@ export interface TransferBulkResponse extends BaseResponse {
   };
 }
 
-export interface TransferFetchRequest {
+interface TransferFetchRequest {
   id: string;
   reference: string;
 }
 
-export interface TransferFetchResponse extends BaseResponse {
+interface TransferFetchResponse extends BaseResponse {
   data: {
     page_info: {
       total: number;
@@ -711,12 +716,12 @@ export interface TransferFetchResponse extends BaseResponse {
   };
 }
 
-export interface TransferListRequest {
+interface TransferListRequest {
   page?: string;
   status?: string;
 }
 
-export interface TransferListResponse extends BaseResponse {
+interface TransferListResponse extends BaseResponse {
   data: {
     page_info: {
       total: number;
@@ -745,12 +750,12 @@ export interface TransferListResponse extends BaseResponse {
   };
 }
 
-export interface TransferGetApplicableFeeRequest {
+interface TransferGetApplicableFeeRequest {
   currency: string;
   amount: string;
 }
 
-export interface TransferGetApplicableFeeResponse extends BaseResponse {
+interface TransferGetApplicableFeeResponse extends BaseResponse {
   data: [
     {
       id: number;
@@ -765,11 +770,11 @@ export interface TransferGetApplicableFeeResponse extends BaseResponse {
   ];
 }
 
-export interface TransferGetBalanceRequest {
+interface TransferGetBalanceRequest {
   currency?: string;
 }
 
-export interface TransferGetBalanceResponse extends BaseResponse {
+interface TransferGetBalanceResponse extends BaseResponse {
   data: {
     Id: number;
     ShortName: string;
@@ -779,11 +784,11 @@ export interface TransferGetBalanceResponse extends BaseResponse {
   };
 }
 
-export interface TransferRetrieveStatusOfBulkRequest {
+interface TransferRetrieveStatusOfBulkRequest {
   batch_id: string;
 }
 
-export interface TransferRetrieveStatusOfBulkResponse extends BaseResponse {
+interface TransferRetrieveStatusOfBulkResponse extends BaseResponse {
   data: {
     page_info: {
       total: number;
@@ -810,14 +815,14 @@ export interface TransferRetrieveStatusOfBulkResponse extends BaseResponse {
   };
 }
 
-export interface TranferAccountVerificationRequest {
+interface TranferAccountVerificationRequest {
   recipientaccount: string;
   destbankcode: string;
   currency?: string;
   country?: string;
 }
 
-export interface TranferAccountVerificationResponse {
+interface TranferAccountVerificationResponse {
   data: {
     data: {
       responsecode: string;
@@ -832,7 +837,7 @@ export interface TranferAccountVerificationResponse {
   };
 }
 
-export interface Subaccount {
+interface Subaccount {
   create(
     data: SubaccountCreateRequest
   ): Promise<AxiosResponse<SubaccountCreateResponse>>;
@@ -844,7 +849,7 @@ export interface Subaccount {
   ): Promise<AxiosResponse<SubaccountFetchResponse>>;
 }
 
-export interface SubaccountCreateRequest {
+interface SubaccountCreateRequest {
   account_bank: string;
   account_number: string;
   business_name: string;
@@ -858,7 +863,7 @@ export interface SubaccountCreateRequest {
   country: string;
 }
 
-export interface SubaccountCreateResponse extends BaseResponse {
+interface SubaccountCreateResponse extends BaseResponse {
   data: {
     id: number;
     account_number: string;
@@ -874,13 +879,13 @@ export interface SubaccountCreateResponse extends BaseResponse {
   };
 }
 
-export interface SubaccountListRequest {
+interface SubaccountListRequest {
   account_number?: string;
   account_bank?: string;
   bank_name?: string;
 }
 
-export interface SubaccountListResponse {
+interface SubaccountListResponse {
   data: {
     page_info: {
       total: number;
@@ -903,11 +908,11 @@ export interface SubaccountListResponse {
   };
 }
 
-export interface SubaccountFetchRequest {
+interface SubaccountFetchRequest {
   id: string;
 }
 
-export interface SubaccountFetchResponse {
+interface SubaccountFetchResponse {
   data: {
     id: number;
     account_number: string;
@@ -924,32 +929,32 @@ export interface SubaccountFetchResponse {
   };
 }
 
-export interface Subscription {
+interface Subscription {
   list(data: SubscriptionListRequest): Promise<AxiosResponse>;
   fetch(data: SubscriptionFetchRequest): Promise<AxiosResponse>;
   activate(data: SubscriptionActivateRequest): Promise<AxiosResponse>;
   cancel(data: SubscriptionCancelRequest): Promise<AxiosResponse>;
 }
 
-export interface SubscriptionListRequest {
+interface SubscriptionListRequest {
   transaction_id: string;
 }
 
-export interface SubscriptionFetchRequest {
+interface SubscriptionFetchRequest {
   transaction_id: string;
 }
 
-export interface SubscriptionActivateRequest {
+interface SubscriptionActivateRequest {
   id: string;
   fetch_by_tx: string;
 }
 
-export interface SubscriptionCancelRequest {
+interface SubscriptionCancelRequest {
   id: string;
   fetch_by_tx: string;
 }
 
-export interface Paymentplan {
+interface Paymentplan {
   create(
     data: PaymentplanCreateRequest
   ): Promise<AxiosResponse<PaymentplanCreateResponse>>;
@@ -965,14 +970,14 @@ export interface Paymentplan {
   ): Promise<AxiosResponse<PaymentplanEditRequest>>;
 }
 
-export interface PaymentplanCreateRequest {
+interface PaymentplanCreateRequest {
   amount: string;
   name: string;
   interval: string;
   duration?: string;
 }
 
-export interface PaymentplanCreateResponse extends BaseResponse {
+interface PaymentplanCreateResponse extends BaseResponse {
   data: {
     id: number;
     name: string;
@@ -985,11 +990,11 @@ export interface PaymentplanCreateResponse extends BaseResponse {
   };
 }
 
-export interface PaymentplanListRequest {
+interface PaymentplanListRequest {
   [others: string]: any;
 }
 
-export interface PaymentplanListResponse extends BaseResponse {
+interface PaymentplanListResponse extends BaseResponse {
   data: {
     page_info: {
       total: number;
@@ -1011,34 +1016,34 @@ export interface PaymentplanListResponse extends BaseResponse {
   };
 }
 
-export interface PaymentplanFetchRequest {
+interface PaymentplanFetchRequest {
   id?: string;
   q?: string;
 }
 
-export interface PaymentplanFetchResponse {
+interface PaymentplanFetchResponse {
   [others: string]: any;
 }
 
-export interface PaymentplanCancelRequest {
+interface PaymentplanCancelRequest {
   id: string;
 }
 
-export interface PaymentplanCancelResponse {
+interface PaymentplanCancelResponse {
   [others: string]: any;
 }
 
-export interface PaymentplanEditRequest {
+interface PaymentplanEditRequest {
   id: string;
   name?: string;
   status?: string;
 }
 
-export interface PaymentplanEditResponse {
+interface PaymentplanEditResponse {
   [others: string]: any;
 }
 
-export interface MobileMoney {
+interface MobileMoney {
   mpesa(
     data: MobileMoneyMpesaRequest
   ): Promise<AxiosResponse<MobileMoneyMpesaResponse>>;
@@ -1059,7 +1064,7 @@ export interface MobileMoney {
   ): Promise<AxiosResponse<MobileMoneyUgandaResponse>>;
 }
 
-export interface MobileMoneyMpesaRequest {
+interface MobileMoneyMpesaRequest {
   currency: string;
   country: string;
   amount: string;
@@ -1076,7 +1081,7 @@ export interface MobileMoneyMpesaRequest {
   is_mpesa_lipa: string;
 }
 
-export interface MobileMoneyMpesaResponse extends BaseResponse {
+interface MobileMoneyMpesaResponse extends BaseResponse {
   data: {
     cycle: string;
     merchantbearsfee: number;
@@ -1110,7 +1115,7 @@ export interface MobileMoneyMpesaResponse extends BaseResponse {
   };
 }
 
-export interface MobileMoneyGhanaRequest {
+interface MobileMoneyGhanaRequest {
   currency: string;
   country: string;
   payment_type: string;
@@ -1129,7 +1134,7 @@ export interface MobileMoneyGhanaRequest {
   device_fingerprint: string;
 }
 
-export interface MobileMoneyGhanaResponse extends BaseResponse {
+interface MobileMoneyGhanaResponse extends BaseResponse {
   data: {
     id: number;
     txRef: number;
@@ -1184,7 +1189,7 @@ export interface MobileMoneyGhanaResponse extends BaseResponse {
   };
 }
 
-export interface MobileMoneyZambiaRequest {
+interface MobileMoneyZambiaRequest {
   currency: string;
   country: string;
   payment_type: string;
@@ -1203,7 +1208,7 @@ export interface MobileMoneyZambiaRequest {
   device_fingerprint: string;
 }
 
-export interface MobileMoneyZambiaResponse extends BaseResponse {
+interface MobileMoneyZambiaResponse extends BaseResponse {
   data: {
     id: number;
     txRef: string;
@@ -1258,7 +1263,7 @@ export interface MobileMoneyZambiaResponse extends BaseResponse {
   };
 }
 
-export interface MobileMoneyRwandaRequest {
+interface MobileMoneyRwandaRequest {
   currency: string;
   country: string;
   payment_type: string;
@@ -1277,7 +1282,7 @@ export interface MobileMoneyRwandaRequest {
   device_fingerprint: string;
 }
 
-export interface MobileMoneyRwandaResponse extends BaseResponse {
+interface MobileMoneyRwandaResponse extends BaseResponse {
   data: {
     id: number;
     txRef: string;
@@ -1332,7 +1337,7 @@ export interface MobileMoneyRwandaResponse extends BaseResponse {
   };
 }
 
-export interface MobileMoneyFrancophoneRequest {
+interface MobileMoneyFrancophoneRequest {
   currency: string;
   country: string;
   payment_type: string;
@@ -1351,7 +1356,7 @@ export interface MobileMoneyFrancophoneRequest {
   device_fingerprint: string;
 }
 
-export interface MobileMoneyFrancophoneResponse extends BaseResponse {
+interface MobileMoneyFrancophoneResponse extends BaseResponse {
   data: {
     data: {
       amount: string;
@@ -1370,7 +1375,7 @@ export interface MobileMoneyFrancophoneResponse extends BaseResponse {
   };
 }
 
-export interface MobileMoneyUgandaRequest {
+interface MobileMoneyUgandaRequest {
   currency: string;
   country: string;
   payment_type: string;
@@ -1389,7 +1394,7 @@ export interface MobileMoneyUgandaRequest {
   device_fingerprint: string;
 }
 
-export interface MobileMoneyUgandaResponse {
+interface MobileMoneyUgandaResponse {
   data: {
     id: number;
     txRef: string;
@@ -1444,7 +1449,7 @@ export interface MobileMoneyUgandaResponse {
   };
 }
 
-export interface VirtualCards {
+interface VirtualCards {
   create(
     data: VirtualCardsCreateRequest
   ): Promise<AxiosResponse<VirtualCardsCreateResponse>>;
@@ -1474,7 +1479,7 @@ export interface VirtualCards {
   ): Promise<AxiosResponse<VirtualCardsFreezeUnfreezeResponse>>;
 }
 
-export interface VirtualCardsCreateRequest {
+interface VirtualCardsCreateRequest {
   currency: string;
   amount: string;
   billing_name: string;
@@ -1486,7 +1491,7 @@ export interface VirtualCardsCreateRequest {
   callback_url?: string;
 }
 
-export interface VirtualCardsCreateResponse extends BaseResponse {
+interface VirtualCardsCreateResponse extends BaseResponse {
   data: {
     id: string;
     AccountId: number;
@@ -1511,11 +1516,11 @@ export interface VirtualCardsCreateResponse extends BaseResponse {
   };
 }
 
-export interface VirtualCardsListRequest {
+interface VirtualCardsListRequest {
   page?: string;
 }
 
-export interface VirtualCardsListResponse extends BaseResponse {
+interface VirtualCardsListResponse extends BaseResponse {
   data: Array<{
     id: string;
     AccountId: number;
@@ -1540,11 +1545,11 @@ export interface VirtualCardsListResponse extends BaseResponse {
   }>;
 }
 
-export interface VirtualCardsGetRequest {
+interface VirtualCardsGetRequest {
   id: string;
 }
 
-export interface VirtualCardsGetResponse extends BaseResponse {
+interface VirtualCardsGetResponse extends BaseResponse {
   data: {
     id: string;
     AccountId: number;
@@ -1569,11 +1574,11 @@ export interface VirtualCardsGetResponse extends BaseResponse {
   };
 }
 
-export interface VirtualCardsTerminateRequest {
+interface VirtualCardsTerminateRequest {
   id: string;
 }
 
-export interface VirtualCardsTerminateResponse extends BaseResponse {
+interface VirtualCardsTerminateResponse extends BaseResponse {
   data: {
     id: number;
     card_hash: string;
@@ -1598,17 +1603,17 @@ export interface VirtualCardsTerminateResponse extends BaseResponse {
   };
 }
 
-export interface VirtualCardsFundRequest {
+interface VirtualCardsFundRequest {
   id: string;
   amount: string;
   debit_currency?: string;
 }
 
-export interface VirtualCardsFundResponse extends BaseResponse {
+interface VirtualCardsFundResponse extends BaseResponse {
   Reference: string;
 }
 
-export interface VirtualCardsFetchTransactionsRequest {
+interface VirtualCardsFetchTransactionsRequest {
   FromDate: string;
   ToDate: string;
   PageIndex: string;
@@ -1616,7 +1621,7 @@ export interface VirtualCardsFetchTransactionsRequest {
   CardId: string;
 }
 
-export interface VirtualCardsFetchTransactionsResponse extends BaseResponse {
+interface VirtualCardsFetchTransactionsResponse extends BaseResponse {
   Transactions: Array<{
     Id: number;
     TransactionAmount: number;
@@ -1653,35 +1658,35 @@ export interface VirtualCardsFetchTransactionsResponse extends BaseResponse {
   Data: any;
 }
 
-export interface VirtualCardsWithrawRequest {
+interface VirtualCardsWithrawRequest {
   card_id: string;
   amount: string;
 }
 
-export interface VirtualCardsWithrawResponse extends BaseResponse {
+interface VirtualCardsWithrawResponse extends BaseResponse {
   Reference: string;
 }
 
-export interface VirtualCardsFreezeUnfreezeRequest {
+interface VirtualCardsFreezeUnfreezeRequest {
   card_id: string;
   status_action: string;
 }
 
-export interface VirtualCardsFreezeUnfreezeResponse {
+interface VirtualCardsFreezeUnfreezeResponse {
   [others: string]: any;
 }
 
-export interface Bvn {
+interface Bvn {
   verification(
     data: BvnVerificationRequest
   ): Promise<AxiosResponse<BvnVerificationResponse>>;
 }
 
-export interface BvnVerificationRequest {
+interface BvnVerificationRequest {
   bvn: string;
 }
 
-export interface BvnVerificationResponse extends BaseResponse {
+interface BvnVerificationResponse extends BaseResponse {
   data: {
     bvn: string;
     first_name: string;
@@ -1695,13 +1700,13 @@ export interface BvnVerificationResponse extends BaseResponse {
   };
 }
 
-export interface VirtualAccount {
+interface VirtualAccount {
   accountNumber(
     data: VirtualAccountAccountNumberRequest
   ): Promise<AxiosResponse<VirtualAccountAccountNumberResponse>>;
 }
 
-export interface VirtualAccountAccountNumberRequest {
+interface VirtualAccountAccountNumberRequest {
   email: string;
   is_permanent?: string;
   frequency?: string;
@@ -1710,7 +1715,7 @@ export interface VirtualAccountAccountNumberRequest {
   txref?: string;
 }
 
-export interface VirtualAccountAccountNumberResponse extends BaseResponse {
+interface VirtualAccountAccountNumberResponse extends BaseResponse {
   data: {
     response_code: string;
     response_message: string;
@@ -1726,18 +1731,18 @@ export interface VirtualAccountAccountNumberResponse extends BaseResponse {
   };
 }
 
-export interface Refund {
+interface Refund {
   refund(
     data: RefundRefundRequest
   ): Promise<AxiosResponse<RefundRefundResponse>>;
 }
 
-export interface RefundRefundRequest {
+interface RefundRefundRequest {
   ref: string;
   amount?: string;
 }
 
-export interface RefundRefundResponse extends BaseResponse {
+interface RefundRefundResponse extends BaseResponse {
   data: {
     AmountRefunded: number;
     walletId: number;
@@ -1751,27 +1756,27 @@ export interface RefundRefundResponse extends BaseResponse {
   };
 }
 
-export interface VerifyTransaction {
+interface VerifyTransaction {
   verify(
     data: VerifyTransactionVerifyRequest
   ): Promise<AxiosResponse<VerifyTransactionVerifyResponse>>;
 }
 
-export interface VerifyTransactionVerifyRequest {
+interface VerifyTransactionVerifyRequest {
   txref: string;
 }
 
-export interface VerifyTransactionVerifyResponse extends BaseResponse {
+interface VerifyTransactionVerifyResponse extends BaseResponse {
   [others: string]: any;
 }
 
-export interface BillsPayment {
+interface BillsPayment {
   bills(
     data: BillsPaymentBillsRequest
   ): Promise<AxiosResponse<BillsPaymentBillsResponse>>;
 }
 
-export interface BillsPaymentBillsRequest {
+interface BillsPaymentBillsRequest {
   service: string;
   service_method: string;
   service_version: string;
@@ -1779,11 +1784,11 @@ export interface BillsPaymentBillsRequest {
   service_payload?: string;
 }
 
-export interface BillsPaymentBillsResponse extends BaseResponse {
+interface BillsPaymentBillsResponse extends BaseResponse {
   [others: string]: any;
 }
 
-export interface Settlement {
+interface Settlement {
   list(
     data: SettlementListRequest
   ): Promise<AxiosResponse<SettlementListResponse>>;
@@ -1792,14 +1797,14 @@ export interface Settlement {
   ): Promise<AxiosResponse<SettlementFetchResponse>>;
 }
 
-export interface SettlementListRequest {
+interface SettlementListRequest {
   from?: string;
   to?: string;
   page?: string;
   subaccountid?: string;
 }
 
-export interface SettlementListResponse extends BaseResponse {
+interface SettlementListResponse extends BaseResponse {
   data: {
     page_info: {
       total: number;
@@ -1851,13 +1856,13 @@ export interface SettlementListResponse extends BaseResponse {
   };
 }
 
-export interface SettlementFetchRequest {
+interface SettlementFetchRequest {
   id: string;
   from?: string;
   to?: string;
 }
 
-export interface SettlementFetchResponse extends BaseResponse {
+interface SettlementFetchResponse extends BaseResponse {
   data: {
     id: number;
     merchant_id: number;
@@ -1925,11 +1930,11 @@ export interface SettlementFetchResponse extends BaseResponse {
   };
 }
 
-export interface USSD {
+interface USSD {
   charge(data: USSDChargeRequest): Promise<AxiosResponse<USSDChargeResponse>>;
 }
 
-export interface USSDChargeRequest {
+interface USSDChargeRequest {
   currency: string;
   country: string;
   payment_type?: string;
@@ -1945,7 +1950,7 @@ export interface USSDChargeRequest {
   device_fingerprint?: string;
 }
 
-export interface USSDChargeResponse {
+interface USSDChargeResponse {
   data: {
     data: {
       amount: string;
@@ -1965,7 +1970,7 @@ export interface USSDChargeResponse {
   };
 }
 
-export interface Ebills {
+interface Ebills {
   create(
     data: EbillsCreateRequest
   ): Promise<AxiosResponse<EbillsCreateResponse>>;
@@ -1974,7 +1979,7 @@ export interface Ebills {
   ): Promise<AxiosResponse<EbillsUpdateResponse>>;
 }
 
-export interface EbillsCreateRequest {
+interface EbillsCreateRequest {
   narration?: string;
   numberofunits: string;
   currency: string;
@@ -1987,7 +1992,7 @@ export interface EbillsCreateRequest {
   custom_business_name?: string;
 }
 
-export interface EbillsCreateResponse extends BaseResponse {
+interface EbillsCreateResponse extends BaseResponse {
   data: {
     order: string;
     flwRef: string;
@@ -1996,14 +2001,16 @@ export interface EbillsCreateResponse extends BaseResponse {
   };
 }
 
-export interface EbillsUpdateRequest {
+interface EbillsUpdateRequest {
   reference: string;
   currency?: string;
   amount: string;
 }
 
-export interface EbillsUpdateResponse extends BaseResponse {
+interface EbillsUpdateResponse extends BaseResponse {
   data: {
     updated: boolean;
   };
 }
+
+export = Rave;
