@@ -332,6 +332,9 @@ A sample response is:
 
 ```javascript
  {
+  status: 'success',
+  message: 'Transfer retry attempt queued.', 
+  data: {
     id: 171221,
     account_number: '0690000044',
     bank_code: '044',
@@ -348,6 +351,7 @@ A sample response is:
     requires_approval: 0,
     is_approved: 1,
     bank_name: 'ACCESS BANK NIGERIA'
+     }
   }
 ```
 
@@ -615,7 +619,9 @@ const createSubAcct=  async ()=>{
         "business_contact_mobile": "090890382",
         "business_mobile": "09087930450",
         "country":"NG",
-        "meta": [{"metaname": "MarketplaceID", "metavalue": "ggs-920900"}]
+        "meta": [{"metaname": "MarketplaceID", "metavalue": "ggs-920900"}],
+        "split_type": "percentage",
+        "split_value": "0.68"
     }
     try {
        const response =  await rave.Subaccount.create(payload)
@@ -635,23 +641,30 @@ This call returns:
 
 ```javascript
 {
-    "status": "success",
-    "message": "SUBACCOUNT-CREATED",
-    "data": {
-        "id": 10,
-        "account_number": "0690000047",
-        "account_bank": "044",
-        "fullname": "Ben Fowler",
-        "date_created": "2018-05-22T23:08:07.000Z",
-        "meta": [
+  status: 'success',
+  message: 'SUBACCOUNT-CREATED',
+  data: {
+    id: 9067,
+    account_number: '0690000035',
+    account_bank: '044',
+    business_name: 'JK Services',
+    fullname: 'Peter Crouch',
+    date_created: '2021-03-03T16:21:45.000Z',
+    meta: [
             {
-                "metaname": "MarketplaceID",
-                "metavalue": "ggs-920800"
+                'metaname': 'MarketplaceID',
+                'metavalue': 'ggs-920900'
             }
-        ],
-        "subaccount_id": "RS_D87A9EE339AE28BFA2AE86041C6DE70E",
-        "bank_name": "ACCESS BANK NIGERIA"
-    }
+          ],
+    account_id: 703099,
+    split_ratio: 1,
+    split_type: 'percentage',
+    split_value: '0.68',
+    subaccount_id: 'RS_30E7E26E03EAE1A9E5A5A2E9186E76B9',
+    bank_name: 'ACCESS BANK NIGERIA',
+    country: 'NG',
+    business_contact: 'Seun Alade'
+  }
 }
 ```
 
